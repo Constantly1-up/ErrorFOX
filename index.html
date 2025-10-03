@@ -59,7 +59,467 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* БАЗОВЫЕ СТИЛИ */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #dbeafe;
+            --secondary: #475569;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --light: #0f172a;
+            --dark: #f1f5f9;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --secondary: #94a3b8;
+            --primary-light: #1e3a8a;
+            --primary: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: -webkit-fill-available;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            font-size: 16px;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ИСПРАВЛЕННАЯ ШАПКА */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 12px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Верхняя часть шапки для мобильных */
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text h1 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            opacity: 0.9;
+            font-weight: 400;
+            display: block;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle, .history-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover, .history-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .search-wrapper {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-container {
+            display: flex;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            min-height: 50px;
+        }
+
+        .search-container:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .search-container input {
+            flex: 1;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            outline: none;
+            background: transparent;
+            color: var(--dark);
+            width: 100%;
+        }
+
+        .search-button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 24px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .search-button:hover {
+            background: #e69008;
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            z-index: 10;
+            display: none;
+            margin-top: 5px;
+            overflow: hidden;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+        }
+
+        /* ОСНОВНОЕ СОДЕРЖИМОЕ */
+        .main {
+            padding: 30px 0 50px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px 16px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ФУТЕР */
+        .footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 40px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ */
+        .hidden {
+            display: none !important;
+        }
+
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
+        @media (max-width: 768px) {
+            .header {
+                padding: 8px 0;
+                position: sticky;
+                top: 0;
+            }
+            
+            .header .container {
+                flex-direction: column;
+                gap: 12px;
+                padding: 0 16px;
+            }
+            
+            .header-top {
+                order: 1;
+                width: 100%;
+            }
+            
+            .logo {
+                flex: 1;
+            }
+            
+            .logo-text h1 {
+                font-size: 16px;
+            }
+            
+            .logo-text span {
+                font-size: 10px;
+            }
+            
+            .logo-image {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .header-actions {
+                order: 2;
+            }
+            
+            .theme-toggle, .history-btn {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .search-wrapper {
+                order: 3;
+                width: 100%;
+                max-width: none;
+                margin-top: 0;
+            }
+            
+            .search-container {
+                min-height: 44px;
+                border-radius: 22px;
+            }
+            
+            .search-container input {
+                padding: 12px 16px;
+                font-size: 16px;
+            }
+            
+            .search-button {
+                padding: 0 20px;
+            }
+            
+            .search-button .search-text {
+                display: none;
+            }
+            
+            .main {
+                padding: 20px 0 40px;
+            }
+            
+            .container {
+                padding: 0 16px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .category-card {
+                padding: 20px 12px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header .container {
+                padding: 0 12px;
+                gap: 8px;
+            }
+            
+            .logo-text h1 {
+                font-size: 15px;
+            }
+            
+            .logo-text span {
+                font-size: 9px;
+            }
+            
+            .logo-image {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .theme-toggle, .history-btn {
+                width: 34px;
+                height: 34px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            
+            .category-card {
+                padding: 18px 10px;
+            }
+        }
+
+        /* Безопасные области для современных iPhone */
+        @supports(padding: max(0px)) {
+            .header .container {
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+            }
+        }
+
+        /* Landscape режим */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .header .container {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .header-top {
+                flex: 1;
+                order: 1;
+            }
+            
+            .search-wrapper {
+                order: 2;
+                flex: 1 0 100%;
+                margin-top: 8px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Яндекс.Метрика -->
@@ -79,15 +539,6 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/97567899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-
     <!-- Toast notifications -->
     <div id="toastContainer"></div>
 
@@ -103,32 +554,37 @@
         <div id="historyList"></div>
     </div>
 
-    <!-- Header -->
+    <!-- ИСПРАВЛЕННАЯ ШАПКА -->
     <header class="header" role="banner">
         <div class="container">
-            <a href="/" class="logo">
-                <div class="logo-image">
-                    <img src="Logo/Logo.png" alt="ErrorFOXbase">
+            <div class="header-top">
+                <a href="/" class="logo">
+                    <div class="logo-image">
+                        <img src="Logo/Logo.png" alt="ErrorFOXbase" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\"fas fa-bug\"></i>';">
+                    </div>
+                    <div class="logo-text">
+                        <h1>ErrorFOXbase</h1>
+                        <span>База знаний по ошибкам</span>
+                    </div>
+                </a>
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="history-btn" id="historyBtn" aria-label="Недавно просмотренные">
+                        <i class="fas fa-history"></i>
+                    </button>
                 </div>
-                <div class="logo-text">
-                    <h1>ErrorFOXbase</h1>
-                    <span>База знаний по ошибкам</span>
-                </div>
-            </a>
+            </div>
             <div class="search-wrapper">
                 <div class="search-container" id="searchContainer">
                     <input type="text" id="searchInput" placeholder="Введите код ошибки или описание..." aria-label="Поиск ошибок">
-                    <button class="search-button" id="searchBtn" aria-label="Найти"><i class="fas fa-search"></i> <span class="search-text">Найти</span></button>
+                    <button class="search-button" id="searchBtn" aria-label="Найти">
+                        <i class="fas fa-search"></i>
+                        <span class="search-text">Найти</span>
+                    </button>
                 </div>
                 <div class="search-suggestions" id="searchSuggestions" role="listbox"></div>
-            </div>
-            <div class="header-actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="history-btn" id="historyBtn" aria-label="Недавно просмотренные">
-                    <i class="fas fa-history"></i>
-                </button>
             </div>
         </div>
     </header>
@@ -136,7 +592,7 @@
     <!-- Main Content -->
     <main class="main" role="main">
         <div class="container">
-            <!-- Статистика (будет скрыта на не-главных страницах) -->
+            <!-- Статистика -->
             <div class="stats hidden" id="statsSection">
                 <div class="stat-card">
                     <div class="stat-number" id="totalErrors">0</div>
@@ -153,107 +609,36 @@
                 <h2 class="section-title" itemprop="name"><i class="fas fa-folder-open"></i> Категории ошибок</h2>
                 <div class="categories-grid" id="categoriesGrid">
                     <!-- Категории будут добавлены через JavaScript -->
-                </div>
-            </section>
-
-            <!-- Подкатегории -->
-            <section class="category-errors hidden" id="subcategoriesSection">
-                <nav class="breadcrumb" aria-label="Хлебные крошки" id="breadcrumb"></nav>
-                <div class="category-header">
-                    <div class="category-title">
-                        <h2 class="section-title" id="categoryTitle"><i class="fab fa-windows"></i> Ошибки Windows</h2>
-                    </div>
-                    <a href="/" class="back-btn" id="backToCategories"><i class="fas fa-arrow-left"></i> Назад</a>
-                </div>
-                <div class="subcategories-grid" id="subcategoriesGrid">
-                    <!-- Подкатегории будут добавлены через JavaScript -->
-                </div>
-            </section>
-
-            <!-- Список ошибок -->
-            <section class="category-errors hidden" id="errorsSection">
-                <nav class="breadcrumb" aria-label="Хлебные крошки" id="errorsBreadcrumb"></nav>
-                <div class="category-header">
-                    <div class="category-title">
-                        <h2 class="section-title" id="errorsTitle"><i class="fab fa-windows"></i> Ошибки Windows</h2>
-                    </div>
-                    <a href="#" class="back-btn" id="backToSubcategories"><i class="fas fa-arrow-left"></i> Назад</a>
-                </div>
-                
-                <div class="errors-list" id="errorsList">
-                    <!-- Ошибки будут добавлены через JavaScript -->
-                </div>
-                <div class="pagination" id="pagination" role="navigation" aria-label="Пагинация">
-                    <!-- Пагинация будет добавлена через JavaScript -->
-                </div>
-            </section>
-
-            <!-- Детальная информация об ошибке -->
-            <section class="error-detail hidden" id="errorDetailSection" itemscope itemtype="https://schema.org/TechArticle">
-                <nav class="breadcrumb" aria-label="Хлебные крошки" id="detailBreadcrumb"></nav>
-                <div class="error-header">
-                    <div>
-                        <div class="error-code-large" id="errorDetailCode" itemprop="headline">0x80070005</div>
-                        <div class="error-title-large" id="errorDetailTitle" itemprop="alternativeHeadline">Ошибка доступа</div>
-                        <div class="quick-actions">
-                            <button class="action-btn" id="copyErrorCode">
-                                <i class="fas fa-copy"></i> Копировать ошибку
-                            </button>
-                            <button class="action-btn" id="shareError">
-                                <i class="fas fa-share"></i> Поделиться
-                            </button>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fab fa-windows"></i>
                         </div>
+                        <h3>Windows</h3>
+                        <p>Системные ошибки Windows</p>
                     </div>
-                    <span id="errorDetailCategory" class="category-tag" itemprop="about">Windows</span>
-                </div>
-                
-                <div class="error-content">
-                    <div itemprop="articleBody">
-                        <p class="error-description" id="errorDetailDescription">
-                            Загрузка описания ошибки...
-                        </p>
-                        
-                        <div class="solutions-container">
-                            <h4 class="solutions-title"><i class="fas fa-tools"></i> Способы решения:</h4>
-                            <div id="errorSolutions">
-                                <!-- Решения будут добавлены через JavaScript -->
-                            </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fab fa-linux"></i>
                         </div>
+                        <h3>Linux</h3>
+                        <p>Ошибки Linux систем</p>
                     </div>
-
-                    <div class="additional-info">
-                        <h4><i class="fas fa-info-circle"></i> Дополнительная информация:</h4>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <strong>Система:</strong>
-                                <span id="errorSystem" itemprop="operatingSystem">Загрузка...</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Срочность:</strong>
-                                <span id="errorUrgency" class="urgency-medium">Загрузка...</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Частота:</strong>
-                                <span id="errorFrequency">Загрузка...</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Последнее обновление:</strong>
-                                <span id="errorLastUpdate" itemprop="datePublished">1 октября 2025</span>
-                            </div>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-network-wired"></i>
                         </div>
+                        <h3>Сети</h3>
+                        <p>Сетевые ошибки</p>
                     </div>
-                </div>
-                <div style="padding: 0 30px 30px;">
-                    <a href="#" class="back-btn" id="backToErrors"><i class="fas fa-arrow-left"></i> Назад к списку</a>
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Программы</h3>
+                        <p>Ошибки приложений</p>
+                    </div>
                 </div>
             </section>
-
-            <!-- Сообщение о отсутствии результатов -->
-            <div class="no-results hidden" id="noResults">
-                <i class="fas fa-search" style="font-size: 48px;"></i>
-                <h3>Ошибка не найдена</h3>
-                <p>Попробуйте другой код ошибки или выберите из категорий</p>
-            </div>
 
             <!-- Сообщение о загрузке -->
             <div class="loading hidden" id="loadingSection">
@@ -278,6 +663,50 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Простой скрипт для проверки работы шапки
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Документ загружен');
+            
+            // Проверка мобильного режима
+            function checkMobile() {
+                const isMobile = window.innerWidth <= 768;
+                console.log('Мобильный режим:', isMobile, 'Ширина:', window.innerWidth);
+                
+                if (isMobile) {
+                    document.body.classList.add('mobile');
+                } else {
+                    document.body.classList.remove('mobile');
+                }
+            }
+            
+            checkMobile();
+            window.addEventListener('resize', checkMobile);
+            
+            // Тема
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', function() {
+                const isDark = document.body.getAttribute('data-theme') === 'dark';
+                document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+                this.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            });
+            
+            // Поиск
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            searchBtn.addEventListener('click', function() {
+                if (searchInput.value.trim()) {
+                    alert('Поиск: ' + searchInput.value);
+                }
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim()) {
+                    alert('Поиск: ' + this.value);
+                }
+            });
+        });
+    </script>
 </body>
-</html>
+    </html>
