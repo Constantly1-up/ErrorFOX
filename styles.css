@@ -58,10 +58,11 @@ body {
     padding: 0 20px;
 }
 
+/* ИСПРАВЛЕННАЯ ШАПКА ДЛЯ МОБИЛЬНЫХ */
 .header {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
-    padding: 16px 0;
+    padding: 12px 0;
     box-shadow: var(--shadow);
     position: sticky;
     top: 0;
@@ -72,9 +73,16 @@ body {
 
 .header .container {
     display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.header-top {
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    width: 100%;
+    gap: 15px;
 }
 
 .logo {
@@ -87,8 +95,8 @@ body {
 }
 
 .logo-image {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     background: white;
     border-radius: 10px;
     display: flex;
@@ -96,6 +104,7 @@ body {
     justify-content: center;
     box-shadow: var(--shadow);
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .logo-image img {
@@ -105,22 +114,25 @@ body {
 }
 
 .logo-text h1 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     margin-bottom: 2px;
     line-height: 1.2;
+    white-space: nowrap;
 }
 
 .logo-text span {
-    font-size: 12px;
+    font-size: 11px;
     opacity: 0.9;
     font-weight: 400;
+    display: block;
 }
 
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
+    flex-shrink: 0;
 }
 
 .theme-toggle, .history-btn {
@@ -136,6 +148,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     backdrop-filter: blur(10px);
+    flex-shrink: 0;
 }
 
 .theme-toggle:hover, .history-btn:hover {
@@ -144,8 +157,7 @@ body {
 }
 
 .search-wrapper {
-    flex: 1;
-    max-width: 600px;
+    width: 100%;
     position: relative;
 }
 
@@ -157,6 +169,7 @@ body {
     box-shadow: var(--shadow);
     border: 2px solid transparent;
     transition: var(--transition);
+    min-height: 50px;
 }
 
 .search-container:focus-within {
@@ -177,6 +190,7 @@ body {
     background: transparent;
     min-width: 0;
     color: var(--dark);
+    width: 100%;
 }
 
 .search-button {
@@ -1300,37 +1314,30 @@ body {
     color: var(--danger);
 }
 
-/* ИСПРАВЛЕННЫЕ МОБИЛЬНЫЕ СТИЛИ ДЛЯ ШАПКИ */
+/* ИСПРАВЛЕННАЯ МОБИЛЬНАЯ АДАПТАЦИЯ ШАПКИ */
 @media (max-width: 768px) {
     .header {
         padding: 8px 0;
         position: sticky;
-        width: 100%;
+        top: 0;
     }
     
     .header .container {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
         padding: 0 16px;
+        gap: 12px;
     }
     
     .header-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        order: 1;
         width: 100%;
-        gap: 12px;
     }
     
     .logo {
-        flex-shrink: 0;
-        min-width: auto;
+        flex: 1;
     }
     
     .logo-text h1 {
         font-size: 16px;
-        white-space: nowrap;
     }
     
     .logo-text span {
@@ -1343,14 +1350,10 @@ body {
     }
     
     .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-shrink: 0;
+        order: 2;
     }
     
-    .theme-toggle, 
-    .history-btn {
+    .theme-toggle, .history-btn {
         width: 36px;
         height: 36px;
     }
@@ -1358,31 +1361,25 @@ body {
     .search-wrapper {
         order: 3;
         width: 100%;
-        margin-top: 0;
+        max-width: none;
     }
     
     .search-container {
-        border-radius: 20px;
         min-height: 44px;
+        border-radius: 22px;
     }
     
     .search-container input {
         padding: 12px 16px;
         font-size: 16px;
-        min-width: 0;
     }
     
     .search-button {
         padding: 0 20px;
-        min-width: 60px;
     }
     
     .search-button .search-text {
         display: none;
-    }
-    
-    .search-button::after {
-        content: "🔍";
     }
     
     .main {
@@ -1391,19 +1388,14 @@ body {
     }
 }
 
-/* Дополнительные улучшения для очень маленьких экранов */
 @media (max-width: 480px) {
     .header .container {
         padding: 0 12px;
         gap: 8px;
     }
     
-    .header-top {
-        gap: 8px;
-    }
-    
     .logo-text h1 {
-        font-size: 14px;
+        font-size: 15px;
     }
     
     .logo-text span {
@@ -1411,22 +1403,17 @@ body {
     }
     
     .logo-image {
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
     }
     
-    .theme-toggle, 
-    .history-btn {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .search-container input {
-        padding: 10px 14px;
+    .theme-toggle, .history-btn {
+        width: 34px;
+        height: 34px;
     }
 }
 
-/* Исправление для безопасных областей на современных iPhone */
+/* Безопасные области для современных iPhone */
 @supports(padding: max(0px)) {
     .header .container {
         padding-left: max(16px, env(safe-area-inset-left));
@@ -1434,280 +1421,26 @@ body {
     }
 }
 
-/* Улучшение для landscape режима на мобильных */
+/* Landscape режим */
 @media (max-width: 768px) and (orientation: landscape) {
-    .header {
-        padding: 6px 0;
-    }
-    
     .header .container {
         flex-direction: row;
-        align-items: center;
+        flex-wrap: wrap;
     }
     
     .header-top {
         flex: 1;
+        order: 1;
     }
     
     .search-wrapper {
-        order: 0;
-        flex: 1;
-        margin-top: 0;
-        max-width: none;
-    }
-}
-
-/* Мобильные улучшения */
-
-/* Улучшенная навигация "пальцем" */
-@media (max-width: 768px) {
-    .category-card, 
-    .subcategory-card,
-    .error-item,
-    .page-btn,
-    .action-btn,
-    .feedback-btn {
-        min-height: 44px; /* Apple HIG recommendation */
-        min-width: 44px;
-        padding: 12px 8px;
-    }
-    
-    /* Увеличиваем зону клика */
-    .search-suggestion {
-        padding: 16px 12px;
-        min-height: 50px;
-    }
-    
-    /* Улучшаем кнопки действий */
-    .back-btn, .search-button {
-        padding: 14px 20px;
-        font-size: 16px; /* Предотвращает zoom в iOS */
-    }
-}
-
-/* Адаптивный поиск с улучшениями */
-@media (max-width: 768px) {
-    .search-wrapper {
-        order: 3;
-        margin-top: 0;
-        width: 100%;
-    }
-    
-    .search-container {
-        border-radius: 20px;
-    }
-    
-    .search-container input {
-        padding: 12px 16px;
-        font-size: 16px; /* Предотвращает zoom */
-    }
-    
-    .search-button {
-        padding: 0 20px;
-        min-width: 60px;
-    }
-    
-    /* Скрываем текст в кнопке поиска на мобильных */
-    .search-button .search-text {
-        display: none;
-    }
-    
-    .search-button::after {
-        content: "🔍";
-        font-size: 18px;
-    }
-}
-
-/* Улучшенная сетка категорий */
-@media (max-width: 480px) {
-    .categories-grid,
-    .subcategories-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
-    .category-card,
-    .subcategory-card {
-        padding: 20px 15px;
-        border-radius: 16px;
-    }
-    
-    .category-icon,
-    .subcategory-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 320px) {
-    .categories-grid,
-    .subcategories-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-}
-
-/* Адаптивный список ошибок */
-@media (max-width: 480px) {
-    .errors-list {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    
-    .error-item {
-        padding: 16px;
-        border-radius: 12px;
-    }
-    
-    .error-code {
-        font-size: 13px;
-        padding: 4px 8px;
-    }
-    
-    .error-title {
-        font-size: 16px;
-        line-height: 1.3;
-    }
-    
-    .error-desc {
-        font-size: 14px;
-        -webkit-line-clamp: 2;
-    }
-}
-
-/* Улучшенная детальная страница ошибки */
-@media (max-width: 480px) {
-    .error-header {
-        padding: 20px 16px;
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .error-code-large {
-        font-size: 20px;
-        padding: 8px 12px;
-    }
-    
-    .error-title-large {
-        font-size: 18px;
+        order: 2;
+        flex: 1 0 100%;
         margin-top: 8px;
     }
-    
-    .quick-actions {
-        justify-content: center;
-        margin-top: 16px;
-    }
-    
-    .action-btn {
-        padding: 10px 16px;
-        font-size: 14px;
-    }
-    
-    .error-content {
-        padding: 16px;
-    }
-    
-    .solution-item {
-        padding: 16px;
-        margin-bottom: 16px;
-    }
-    
-    .solution-steps {
-        padding-left: 20px;
-    }
-    
-    .solution-steps li {
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
 }
 
-/* Мобильная панель истории */
-@media (max-width: 480px) {
-    .history-panel {
-        width: 100%;
-        right: -100%;
-    }
-    
-    .history-item {
-        padding: 14px 12px;
-    }
-    
-    .history-header {
-        padding: 16px;
-    }
-}
-
-/* Улучшенная пагинация */
-@media (max-width: 480px) {
-    .pagination {
-        gap: 6px;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding: 10px 0;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .page-btn {
-        min-width: 44px;
-        height: 44px;
-        font-size: 16px;
-    }
-}
-
-/* Более читаемые тексты */
-@media (max-width: 480px) {
-    body {
-        font-size: 16px; /* Базовый размер для читаемости */
-        line-height: 1.5;
-    }
-    
-    .section-title {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-    
-    .breadcrumb {
-        padding: 12px 16px;
-        font-size: 14px;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-    
-    .breadcrumb a {
-        white-space: nowrap;
-    }
-}
-
-/* Safe area insets для современных iPhone */
-@supports(padding: max(0px)) {
-    .header, .footer {
-        padding-left: max(16px, env(safe-area-inset-left));
-        padding-right: max(16px, env(safe-area-inset-right));
-    }
-    
-    .footer {
-        padding-bottom: max(20px, env(safe-area-inset-bottom));
-    }
-}
-
-/* Улучшение performance на мобильных */
-@media (max-width: 768px) {
-    .category-card::before,
-    .error-item::before,
-    .solution-item::before {
-        display: none; /* Отключаем сложные анимации на слабых устройствах */
-    }
-    
-    .category-card:hover,
-    .error-item:hover {
-        transform: none; /* Отключаем hover-эффекты */
-    }
-}
-
-/* Дополнительные мобильные улучшения */
+/* Остальные мобильные стили */
 @media (max-width: 768px) {
     body {
         font-size: 14px;
@@ -1717,68 +1450,78 @@ body {
         padding: 0 16px;
     }
     
-    .header-actions {
-        position: static;
-        display: flex;
-        justify-content: flex-end;
-        padding: 0;
-    }
-
-    .search-wrapper {
-        width: 100%;
-    }
-
-    .search-container input {
-        padding: 12px 16px;
-        font-size: 16px;
-    }
-
-    .search-button {
-        padding: 0 20px;
-    }
-
-    .search-button.compact {
-        width: 50px;
-        padding: 0;
-    }
-
     .section-title {
         font-size: 20px;
         margin-bottom: 20px;
     }
-
+    
     .stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
         max-width: 100%;
     }
-
+    
     .stat-card {
         padding: 16px 12px;
     }
-
+    
     .stat-number {
         font-size: 24px;
     }
-
+    
+    .categories-grid,
+    .subcategories-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+    
+    .category-card,
+    .subcategory-card {
+        padding: 20px 12px;
+    }
+    
     .category-header {
         flex-direction: column;
         align-items: flex-start;
     }
-
+    
     .breadcrumb {
         padding: 12px 16px;
         font-size: 13px;
     }
-
+    
+    .errors-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .error-item {
+        padding: 16px;
+    }
+    
+    .error-header {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .error-content {
+        padding: 20px;
+    }
+    
+    .history-panel {
+        width: 100%;
+        right: -100%;
+    }
+    
     .footer .container {
         gap: 20px;
     }
-
+    
     .footer-links {
         gap: 16px;
     }
-
+    
     .toast {
         left: 16px;
         right: 16px;
@@ -1789,7 +1532,20 @@ body {
 @media (max-width: 480px) {
     .categories-grid,
     .subcategories-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    
+    .category-card,
+    .subcategory-card {
+        padding: 18px 10px;
+    }
+    
+    .category-icon,
+    .subcategory-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
     }
     
     .stats {
@@ -1820,4 +1576,4 @@ body {
     .footer .container {
         flex-direction: column;
     }
-    }   
+    }
