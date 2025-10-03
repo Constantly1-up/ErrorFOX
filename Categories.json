@@ -1,0 +1,52 @@
+{
+  "windows": {
+    "name": "Windows",
+    "icon": "fab fa-windows",
+    "description": "Системные ошибки Windows"
+  },
+  "linux": {
+    "name": "Linux", 
+    "icon": "fab fa-linux",
+    "description": "Ошибки Linux/Unix систем"
+  },
+  "http": {
+    "name": "HTTP",
+    "icon": "fas fa-globe",
+    "description": "HTTP коды статусов"
+  },
+  "network": {
+    "name": "Сеть",
+    "icon": "fas fa-wifi", 
+    "description": "Сетевые ошибки и подключения"
+  },
+  "software": {
+    "name": "Программы",
+    "icon": "fas fa-desktop",
+    "description": "Ошибки приложений и ПО"
+  },
+  "hardware": {
+    "name": "Железо",
+    "icon": "fas fa-microchip",
+    "description": "Аппаратные ошибки оборудования"
+  },
+  "database": {
+    "name": "Базы данных",
+    "icon": "fas fa-database",
+    "description": "Ошибки СУБД и запросов"
+  },
+  "security": {
+    "name": "Безопасность",
+    "icon": "fas fa-shield-alt",
+    "description": "Ошибки безопасности и доступа"
+  },
+  "browser": {
+    "name": "Браузеры",
+    "icon": "fas fa-compass",
+    "description": "Ошибки веб-браузеров"
+  },
+  "gaming": {
+    "name": "Игры",
+    "icon": "fas fa-gamepad",
+    "description": "Ошибки игровых платформ"
+  }
+}
