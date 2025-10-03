@@ -1,0 +1,64 @@
+{
+  "windows": [
+    {"id": "system", "name": "Системные ошибки", "icon": "fas fa-cog"},
+    {"id": "apps", "name": "Ошибки приложений", "icon": "fas fa-window-restore"},
+    {"id": "bsod", "name": "Синий экран (BSOD)", "icon": "fas fa-exclamation-triangle"},
+    {"id": "update", "name": "Ошибки обновления", "icon": "fas fa-sync-alt"},
+    {"id": "disk_errors", "name": "Ошибки диска", "icon": "fas fa-hdd"},
+    {"id": "performance", "name": "Производительность", "icon": "fas fa-tachometer-alt"},
+    {"id": "update_center", "name": "Центр обновления", "icon": "fas fa-download"},
+    {"id": "file_system", "name": "Файловая система", "icon": "fas fa-folder"},
+    {"id": "cloud_services", "name": "Облачные службы", "icon": "fas fa-cloud"},
+    {"id": "device_errors", "name": "Ошибки устройств", "icon": "fas fa-usb"},
+    {"id": "activation", "name": "Активация", "icon": "fas fa-key"},
+    {"id": "security", "name": "Безопасность", "icon": "fas fa-shield-alt"},
+    {"id": "store", "name": "Microsoft Store", "icon": "fas fa-shopping-bag"}
+  ],
+  "linux": [
+    {"id": "permissions", "name": "Права доступа", "icon": "fas fa-user-shield"},
+    {"id": "kernel", "name": "Ошибки ядра", "icon": "fas fa-microchip"},
+    {"id": "package", "name": "Ошибки пакетов", "icon": "fas fa-box"},
+    {"id": "file_system", "name": "Файловая система", "icon": "fas fa-folder"},
+    {"id": "network", "name": "Сетевые ошибки", "icon": "fas fa-network-wired"}
+  ],
+  "http": [
+    {"id": "client", "name": "Клиентские ошибки (4xx)", "icon": "fas fa-exclamation-triangle"},
+    {"id": "server", "name": "Серверные ошибки (5xx)", "icon": "fas fa-server"}
+  ],
+  "network": [
+    {"id": "internet", "name": "Интернет подключение", "icon": "fas fa-globe"},
+    {"id": "dns", "name": "DNS ошибки", "icon": "fas fa-network-wired"},
+    {"id": "wifi", "name": "Wi-Fi подключение", "icon": "fas fa-wifi"},
+    {"id": "connection_errors", "name": "Ошибки подключения", "icon": "fas fa-plug"},
+    {"id": "browser_errors", "name": "Ошибки браузера", "icon": "fas fa-compass"}
+  ],
+  "software": [
+    {"id": "office", "name": "Microsoft Office", "icon": "fas fa-file-word"},
+    {"id": "browsers", "name": "Веб-браузеры", "icon": "fas fa-compass"},
+    {"id": "development", "name": "Инструменты разработки", "icon": "fas fa-code"},
+    {"id": "net_framework", "name": ".NET Framework", "icon": "fas fa-cogs"},
+    {"id": "browser_errors", "name": "Ошибки браузера", "icon": "fas fa-exclamation-triangle"}
+  ],
+  "hardware": [
+    {"id": "ram", "name": "Оперативная память", "icon": "fas fa-memory"},
+    {"id": "storage", "name": "Накопители", "icon": "fas fa-hdd"},
+    {"id": "gpu", "name": "Видеокарта", "icon": "fas fa-desktop"},
+    {"id": "device_errors", "name": "Ошибки устройств", "icon": "fas fa-usb"},
+    {"id": "disk_errors", "name": "Ошибки диска", "icon": "fas fa-hdd"}
+  ],
+  "database": [
+    {"id": "mysql", "name": "MySQL ошибки", "icon": "fas fa-database"},
+    {"id": "postgresql", "name": "PostgreSQL ошибки", "icon": "fas fa-database"}
+  ],
+  "security": [
+    {"id": "access", "name": "Контроль доступа", "icon": "fas fa-lock"},
+    {"id": "encryption", "name": "Шифрование", "icon": "fas fa-key"},
+    {"id": "ssl", "name": "SSL ошибки", "icon": "fas fa-lock"}
+  ],
+  "browser": [
+    {"id": "ie", "name": "Internet Explorer", "icon": "fab fa-internet-explorer"}
+  ],
+  "gaming": [
+    {"id": "xbox", "name": "Xbox", "icon": "fab fa-xbox"}
+  ]
+    }
