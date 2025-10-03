@@ -1300,31 +1300,37 @@ body {
     color: var(--danger);
 }
 
-/* Мобильные улучшения */
-
-/* Компактный header для мобильных */
+/* ИСПРАВЛЕННЫЕ МОБИЛЬНЫЕ СТИЛИ ДЛЯ ШАПКИ */
 @media (max-width: 768px) {
     .header {
         padding: 8px 0;
-        position: fixed;
-        top: 0;
+        position: sticky;
         width: 100%;
-        z-index: 1000;
     }
     
     .header .container {
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
         padding: 0 16px;
+    }
+    
+    .header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 12px;
     }
     
     .logo {
         flex-shrink: 0;
+        min-width: auto;
     }
     
     .logo-text h1 {
         font-size: 16px;
+        white-space: nowrap;
     }
     
     .logo-text span {
@@ -1336,11 +1342,122 @@ body {
         height: 32px;
     }
     
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+    
+    .theme-toggle, 
+    .history-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .search-wrapper {
+        order: 3;
+        width: 100%;
+        margin-top: 0;
+    }
+    
+    .search-container {
+        border-radius: 20px;
+        min-height: 44px;
+    }
+    
+    .search-container input {
+        padding: 12px 16px;
+        font-size: 16px;
+        min-width: 0;
+    }
+    
+    .search-button {
+        padding: 0 20px;
+        min-width: 60px;
+    }
+    
+    .search-button .search-text {
+        display: none;
+    }
+    
+    .search-button::after {
+        content: "🔍";
+    }
+    
     .main {
-        padding-top: 80px; /* Компенсируем фиксированный header */
+        padding-top: 20px;
         padding-bottom: 40px;
     }
 }
+
+/* Дополнительные улучшения для очень маленьких экранов */
+@media (max-width: 480px) {
+    .header .container {
+        padding: 0 12px;
+        gap: 8px;
+    }
+    
+    .header-top {
+        gap: 8px;
+    }
+    
+    .logo-text h1 {
+        font-size: 14px;
+    }
+    
+    .logo-text span {
+        font-size: 9px;
+    }
+    
+    .logo-image {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .theme-toggle, 
+    .history-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .search-container input {
+        padding: 10px 14px;
+    }
+}
+
+/* Исправление для безопасных областей на современных iPhone */
+@supports(padding: max(0px)) {
+    .header .container {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+    }
+}
+
+/* Улучшение для landscape режима на мобильных */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header {
+        padding: 6px 0;
+    }
+    
+    .header .container {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .header-top {
+        flex: 1;
+    }
+    
+    .search-wrapper {
+        order: 0;
+        flex: 1;
+        margin-top: 0;
+        max-width: none;
+    }
+}
+
+/* Мобильные улучшения */
 
 /* Улучшенная навигация "пальцем" */
 @media (max-width: 768px) {
@@ -1372,7 +1489,7 @@ body {
 @media (max-width: 768px) {
     .search-wrapper {
         order: 3;
-        margin-top: 10px;
+        margin-top: 0;
         width: 100%;
     }
     
@@ -1703,4 +1820,4 @@ body {
     .footer .container {
         flex-direction: column;
     }
-  }
+    }   
