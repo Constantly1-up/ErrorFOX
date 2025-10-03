@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     
-    <!-- Базовые SEO мета-теги -->
     <title>ErrorFOXbase - База знаний по ошибкам Windows, Linux, программ и сетей</title>
-    <meta name="description" content="ErrorFOXbase - полная база знаний по ошибкам Windows, Linux, программ и сетей. Пошаговые решения с инструкциями для IT-специалистов и пользователей. Находите и исправляйте ошибки быстро.">
-    <meta name="keywords" content="ошибки Windows, решение ошибок, коды ошибок, IT помощь, системные ошибки, ошибки Linux, сетевые ошибки, исправление ошибок">
+    <meta name="description" content="ErrorFOXbase - полная база знаний по ошибкам Windows, Linux, программ и сетей. Пошаговые решения с инструкциями для IT-специалистов и пользователей.">
+    <meta name="keywords" content="ошибки Windows, решение ошибок, коды ошибок, IT помощь, системные ошибки, ошибки Linux, сетевые ошибки">
     <meta name="author" content="ErrorFOXbase">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph для социальных сетей -->
     <meta property="og:title" content="ErrorFOXbase - База знаний по ошибкам и решениям">
     <meta property="og:description" content="Полная база знаний по ошибкам Windows, Linux, программ и сетей. Пошаговые решения с инструкциями для IT-специалистов.">
     <meta property="og:type" content="website">
@@ -19,21 +17,16 @@
     <meta property="og:image" content="https://errorfoxbase.ru/images/og-image.jpg">
     <meta property="og:locale" content="ru_RU">
     
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ErrorFOXbase - База знаний по ошибкам и решениям">
     <meta name="twitter:description" content="База знаний по ошибкам Windows, Linux, программ и сетей. Пошаговые решения с инструкциями.">
     
-    <!-- Канонический URL -->
     <link rel="canonical" href="https://errorfoxbase.ru/">
-    
-    <!-- Фавиконки -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
-    <!-- Структурированные данные (JSON-LD) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -88,6 +81,8 @@
             --secondary: #94a3b8;
             --primary-light: #1e3a8a;
             --primary: #3b82f6;
+            --error-code-bg: #1e3a8a;
+            --error-code-color: #bfdbfe;
         }
 
         * {
@@ -131,12 +126,10 @@
 
         .header .container {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        /* Верхняя часть шапки для мобильных */
         .header-top {
             display: flex;
             align-items: center;
@@ -216,8 +209,7 @@
         }
 
         .search-wrapper {
-            flex: 1;
-            max-width: 600px;
+            width: 100%;
             position: relative;
         }
 
@@ -283,6 +275,27 @@
             border: 1px solid var(--border);
         }
 
+        .search-suggestion {
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .search-suggestion:hover {
+            background: var(--primary-light);
+        }
+
+        .suggestion-code {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
         /* ОСНОВНОЕ СОДЕРЖИМОЕ */
         .main {
             padding: 30px 0 50px;
@@ -297,6 +310,40 @@
             align-items: center;
             gap: 12px;
             color: var(--dark);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px 16px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--secondary);
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .categories-grid {
@@ -322,6 +369,428 @@
         .category-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: var(--primary);
+            font-size: 24px;
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
+        }
+
+        .category-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .category-card p {
+            color: var(--secondary);
+            font-size: 14px;
+        }
+
+        /* Подкатегории */
+        .subcategories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .subcategory-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 16px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            border-left: 4px solid var(--accent);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .subcategory-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .subcategory-icon {
+            width: 50px;
+            height: 50px;
+            background: #fef3c7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            color: var(--accent);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .subcategory-card:hover .subcategory-icon {
+            transform: scale(1.1);
+        }
+
+        /* Хлебные крошки */
+        .breadcrumb {
+            background: var(--card-bg);
+            padding: 16px 20px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: var(--primary-dark);
+        }
+
+        /* Заголовок категории */
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .back-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: #475569;
+            transform: translateY(-2px);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Список ошибок */
+        .errors-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .error-item {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border-left: 4px solid var(--primary);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .error-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .error-code {
+            font-family: 'Courier New', monospace;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .error-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+
+        .error-desc {
+            color: var(--secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Детальная страница ошибки */
+        .error-detail {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .error-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .error-code-large {
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            word-break: break-all;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .error-title-large {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .category-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .error-content {
+            padding: 30px;
+        }
+
+        .error-description {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+
+        .solutions-container {
+            margin-bottom: 30px;
+        }
+
+        .solutions-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+        }
+
+        .solution-item {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .solution-header {
+            margin-bottom: 16px;
+        }
+
+        .solution-level {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .solution-level-beginner {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .solution-level-intermediate {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .solution-level-advanced {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .solution-header h5 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .additional-info {
+            background: var(--light);
+            padding: 24px;
+            border-radius: var(--radius);
+            margin-top: 30px;
+        }
+
+        .additional-info h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+        }
+
+        .info-item strong {
+            color: var(--dark);
+        }
+
+        .info-item span {
+            color: var(--secondary);
+            text-align: right;
+        }
+
+        .urgency-low {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .urgency-medium {
+            color: var(--warning);
+            font-weight: 500;
+        }
+
+        .urgency-high {
+            color: var(--danger);
+            font-weight: 500;
+        }
+
+        /* Сообщения */
+        .no-results, .loading {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 40px 0;
+        }
+
+        .no-results i, .loading i {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .no-results h3, .loading p {
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 20px;
+        }
+
+        .loading-spinner {
+            margin-bottom: 20px;
+        }
+
+        .loading-spinner i {
+            font-size: 36px;
+            color: var(--primary);
         }
 
         /* ФУТЕР */
@@ -362,9 +831,102 @@
             text-decoration: underline;
         }
 
+        /* Панель истории */
+        .history-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--card-bg);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .history-panel.active {
+            right: 0;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .history-header h3 {
+            color: var(--dark);
+            font-size: 18px;
+        }
+
+        .close-history {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--secondary);
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .history-item {
+            padding: 12px;
+            border-radius: var(--radius);
+            background: var(--light);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 3px solid var(--primary);
+        }
+
+        .history-item:hover {
+            background: var(--primary-light);
+            transform: translateX(4px);
+        }
+
+        .history-code {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
         /* ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ */
         .hidden {
             display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-4 {
+            margin-bottom: 24px;
         }
 
         /* МОБИЛЬНАЯ АДАПТАЦИЯ */
@@ -376,14 +938,12 @@
             }
             
             .header .container {
-                flex-direction: column;
-                gap: 12px;
                 padding: 0 16px;
+                gap: 12px;
             }
             
             .header-top {
                 order: 1;
-                width: 100%;
             }
             
             .logo {
@@ -415,8 +975,6 @@
             .search-wrapper {
                 order: 3;
                 width: 100%;
-                max-width: none;
-                margin-top: 0;
             }
             
             .search-container {
@@ -445,17 +1003,37 @@
                 padding: 0 16px;
             }
             
-            .categories-grid {
+            .categories-grid, .subcategories-grid {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 gap: 15px;
             }
             
-            .category-card {
+            .category-card, .subcategory-card {
                 padding: 20px 12px;
             }
             
             .section-title {
                 font-size: 20px;
+            }
+            
+            .errors-list {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .error-header {
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .error-content {
+                padding: 20px;
+            }
+            
+            .history-panel {
+                width: 100%;
+                right: -100%;
             }
         }
 
@@ -483,13 +1061,24 @@
                 height: 34px;
             }
             
-            .categories-grid {
+            .categories-grid, .subcategories-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 12px;
             }
             
-            .category-card {
+            .category-card, .subcategory-card {
                 padding: 18px 10px;
+            }
+            
+            .category-icon, .subcategory-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+                max-width: 100%;
             }
         }
 
@@ -554,7 +1143,7 @@
         <div id="historyList"></div>
     </div>
 
-    <!-- ИСПРАВЛЕННАЯ ШАПКА -->
+    <!-- Header -->
     <header class="header" role="banner">
         <div class="container">
             <div class="header-top">
@@ -609,36 +1198,107 @@
                 <h2 class="section-title" itemprop="name"><i class="fas fa-folder-open"></i> Категории ошибок</h2>
                 <div class="categories-grid" id="categoriesGrid">
                     <!-- Категории будут добавлены через JavaScript -->
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fab fa-windows"></i>
-                        </div>
-                        <h3>Windows</h3>
-                        <p>Системные ошибки Windows</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fab fa-linux"></i>
-                        </div>
-                        <h3>Linux</h3>
-                        <p>Ошибки Linux систем</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-network-wired"></i>
-                        </div>
-                        <h3>Сети</h3>
-                        <p>Сетевые ошибки</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h3>Программы</h3>
-                        <p>Ошибки приложений</p>
-                    </div>
                 </div>
             </section>
+
+            <!-- Подкатегории -->
+            <section class="category-errors hidden" id="subcategoriesSection">
+                <nav class="breadcrumb" aria-label="Хлебные крошки" id="breadcrumb"></nav>
+                <div class="category-header">
+                    <div class="category-title">
+                        <h2 class="section-title" id="categoryTitle"><i class="fab fa-windows"></i> Ошибки Windows</h2>
+                    </div>
+                    <a href="/" class="back-btn" id="backToCategories"><i class="fas fa-arrow-left"></i> Назад</a>
+                </div>
+                <div class="subcategories-grid" id="subcategoriesGrid">
+                    <!-- Подкатегории будут добавлены через JavaScript -->
+                </div>
+            </section>
+
+            <!-- Список ошибок -->
+            <section class="category-errors hidden" id="errorsSection">
+                <nav class="breadcrumb" aria-label="Хлебные крошки" id="errorsBreadcrumb"></nav>
+                <div class="category-header">
+                    <div class="category-title">
+                        <h2 class="section-title" id="errorsTitle"><i class="fab fa-windows"></i> Ошибки Windows</h2>
+                    </div>
+                    <a href="#" class="back-btn" id="backToSubcategories"><i class="fas fa-arrow-left"></i> Назад</a>
+                </div>
+                
+                <div class="errors-list" id="errorsList">
+                    <!-- Ошибки будут добавлены через JavaScript -->
+                </div>
+                <div class="pagination" id="pagination" role="navigation" aria-label="Пагинация">
+                    <!-- Пагинация будет добавлена через JavaScript -->
+                </div>
+            </section>
+
+            <!-- Детальная информация об ошибке -->
+            <section class="error-detail hidden" id="errorDetailSection" itemscope itemtype="https://schema.org/TechArticle">
+                <nav class="breadcrumb" aria-label="Хлебные крошки" id="detailBreadcrumb"></nav>
+                <div class="error-header">
+                    <div>
+                        <div class="error-code-large" id="errorDetailCode" itemprop="headline">0x80070005</div>
+                        <div class="error-title-large" id="errorDetailTitle" itemprop="alternativeHeadline">Ошибка доступа</div>
+                        <div class="quick-actions">
+                            <button class="action-btn" id="copyErrorCode">
+                                <i class="fas fa-copy"></i> Копировать ошибку
+                            </button>
+                            <button class="action-btn" id="shareError">
+                                <i class="fas fa-share"></i> Поделиться
+                            </button>
+                        </div>
+                    </div>
+                    <span id="errorDetailCategory" class="category-tag" itemprop="about">Windows</span>
+                </div>
+                
+                <div class="error-content">
+                    <div itemprop="articleBody">
+                        <p class="error-description" id="errorDetailDescription">
+                            Загрузка описания ошибки...
+                        </p>
+                        
+                        <div class="solutions-container">
+                            <h4 class="solutions-title"><i class="fas fa-tools"></i> Способы решения:</h4>
+                            <div id="errorSolutions">
+                                <!-- Решения будут добавлены через JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="additional-info">
+                        <h4><i class="fas fa-info-circle"></i> Дополнительная информация:</h4>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <strong>Система:</strong>
+                                <span id="errorSystem" itemprop="operatingSystem">Загрузка...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Срочность:</strong>
+                                <span id="errorUrgency" class="urgency-medium">Загрузка...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Частота:</strong>
+                                <span id="errorFrequency">Загрузка...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Последнее обновление:</strong>
+                                <span id="errorLastUpdate" itemprop="datePublished">1 октября 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 0 30px 30px;">
+                    <a href="#" class="back-btn" id="backToErrors"><i class="fas fa-arrow-left"></i> Назад к списку</a>
+                </div>
+            </section>
+
+            <!-- Сообщение о отсутствии результатов -->
+            <div class="no-results hidden" id="noResults">
+                <i class="fas fa-search" style="font-size: 48px;"></i>
+                <h3>Ошибка не найдена</h3>
+                <p>Попробуйте другой код ошибки или выберите из категорий</p>
+            </div>
 
             <!-- Сообщение о загрузке -->
             <div class="loading hidden" id="loadingSection">
@@ -664,48 +1324,92 @@
     </footer>
 
     <script>
-        // Простой скрипт для проверки работы шапки
+        // Базовый JavaScript для функциональности
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Документ загружен');
-            
-            // Проверка мобильного режима
-            function checkMobile() {
-                const isMobile = window.innerWidth <= 768;
-                console.log('Мобильный режим:', isMobile, 'Ширина:', window.innerWidth);
-                
-                if (isMobile) {
-                    document.body.classList.add('mobile');
-                } else {
-                    document.body.classList.remove('mobile');
-                }
-            }
-            
-            checkMobile();
-            window.addEventListener('resize', checkMobile);
-            
-            // Тема
+            // Переключение темы
             const themeToggle = document.getElementById('themeToggle');
             themeToggle.addEventListener('click', function() {
                 const isDark = document.body.getAttribute('data-theme') === 'dark';
                 document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
                 this.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', isDark ? 'light' : 'dark');
             });
-            
+
+            // Загрузка темы из localStorage
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+            // Панель истории
+            const historyBtn = document.getElementById('historyBtn');
+            const historyPanel = document.getElementById('historyPanel');
+            const closeHistory = document.getElementById('closeHistory');
+            const overlay = document.getElementById('overlay');
+
+            historyBtn.addEventListener('click', function() {
+                historyPanel.classList.add('active');
+                overlay.classList.add('active');
+            });
+
+            closeHistory.addEventListener('click', function() {
+                historyPanel.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            overlay.addEventListener('click', function() {
+                historyPanel.classList.remove('active');
+                this.classList.remove('active');
+            });
+
             // Поиск
             const searchInput = document.getElementById('searchInput');
             const searchBtn = document.getElementById('searchBtn');
-            
-            searchBtn.addEventListener('click', function() {
-                if (searchInput.value.trim()) {
-                    alert('Поиск: ' + searchInput.value);
-                }
-            });
-            
+            const searchSuggestions = document.getElementById('searchSuggestions');
+
+            searchBtn.addEventListener('click', performSearch);
             searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && this.value.trim()) {
-                    alert('Поиск: ' + this.value);
-                }
+                if (e.key === 'Enter') performSearch();
             });
+
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    // Здесь будет логика поиска
+                    console.log('Поиск:', query);
+                    searchSuggestions.style.display = 'none';
+                }
+            }
+
+            // Демо-категории
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            const categories = [
+                { name: 'Windows', icon: 'fab fa-windows', desc: 'Системные ошибки Windows' },
+                { name: 'Linux', icon: 'fab fa-linux', desc: 'Ошибки Linux систем' },
+                { name: 'Сети', icon: 'fas fa-network-wired', desc: 'Сетевые ошибки' },
+                { name: 'Программы', icon: 'fas fa-code', desc: 'Ошибки приложений' },
+                { name: 'Базы данных', icon: 'fas fa-database', desc: 'Ошибки СУБД' },
+                { name: 'Безопасность', icon: 'fas fa-shield-alt', desc: 'Ошибки безопасности' }
+            ];
+
+            categories.forEach(cat => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card';
+                categoryCard.innerHTML = `
+                    <div class="category-icon">
+                        <i class="${cat.icon}"></i>
+                    </div>
+                    <h3>${cat.name}</h3>
+                    <p>${cat.desc}</p>
+                `;
+                categoryCard.addEventListener('click', function() {
+                    // Здесь будет логика перехода к подкатегориям
+                    console.log('Выбрана категория:', cat.name);
+                });
+                categoriesGrid.appendChild(categoryCard);
+            });
+
+            // Показать основную секцию
+            document.getElementById('categoriesSection').classList.remove('hidden');
         });
     </script>
 </body>
