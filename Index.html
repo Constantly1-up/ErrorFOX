@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Базовые SEO мета-теги -->
+    <title>ErrorFOXbase - База знаний по ошибкам Windows, Linux, программ и сетей</title>
+    <meta name="description" content="ErrorFOXbase - полная база знаний по ошибкам Windows, Linux, программ и сетей. Пошаговые решения с инструкциями для IT-специалистов и пользователей. Находите и исправляйте ошибки быстро.">
+    <meta name="keywords" content="ошибки Windows, решение ошибок, коды ошибок, IT помощь, системные ошибки, ошибки Linux, сетевые ошибки, исправление ошибок">
+    <meta name="author" content="ErrorFOXbase">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph для социальных сетей -->
+    <meta property="og:title" content="ErrorFOXbase - База знаний по ошибкам и решениям">
+    <meta property="og:description" content="Полная база знаний по ошибкам Windows, Linux, программ и сетей. Пошаговые решения с инструкциями для IT-специалистов.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://errorfoxbase.ru/">
+    <meta property="og:image" content="https://errorfoxbase.ru/images/og-image.jpg">
+    <meta property="og:locale" content="ru_RU">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ErrorFOXbase - База знаний по ошибкам и решениям">
+    <meta name="twitter:description" content="База знаний по ошибкам Windows, Linux, программ и сетей. Пошаговые решения с инструкциями.">
+    
+    <!-- Канонический URL -->
+    <link rel="canonical" href="https://errorfoxbase.ru/">
+    
+    <!-- Фавиконки -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <!-- Структурированные данные (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ErrorFOXbase",
+        "description": "База знаний по ошибкам и решениям для IT-специалистов и пользователей",
+        "url": "https://errorfoxbase.ru/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://errorfoxbase.ru/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "ErrorFOXbase",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://errorfoxbase.ru/logo.png"
+            }
+        }
+    }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(97567899, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/97567899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    <!-- Toast notifications -->
+    <div id="toastContainer"></div>
+
+    <!-- History Panel -->
+    <div class="overlay" id="overlay"></div>
+    <div class="history-panel" id="historyPanel">
+        <div class="history-header">
+            <h3><i class="fas fa-history"></i> Недавно просмотренные</h3>
+            <button class="close-history" id="closeHistory">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="historyList"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-image">
+                    <img src="Logo/Logo.png" alt="ErrorFOXbase">
+                </div>
+                <div class="logo-text">
+                    <h1>ErrorFOXbase</h1>
+                    <span>База знаний по ошибкам</span>
+                </div>
+            </a>
+            <div class="search-wrapper">
+                <div class="search-container" id="searchContainer">
+                    <input type="text" id="searchInput" placeholder="Введите код ошибки или описание..." aria-label="Поиск ошибок">
+                    <button class="search-button" id="searchBtn" aria-label="Найти"><i class="fas fa-search"></i> <span class="search-text">Найти</span></button>
+                </div>
+                <div class="search-suggestions" id="searchSuggestions" role="listbox"></div>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="history-btn" id="historyBtn" aria-label="Недавно просмотренные">
+                    <i class="fas fa-history"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" role="main">
+        <div class="container">
+            <!-- Статистика (будет скрыта на не-главных страницах) -->
+            <div class="stats hidden" id="statsSection">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalErrors">0</div>
+                    <div class="stat-label">ошибок в базе</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSolutions">0</div>
+                    <div class="stat-label">решений</div>
+                </div>
+            </div>
+
+            <!-- Категории -->
+            <section class="categories" id="categoriesSection" itemscope itemtype="https://schema.org/ItemList">
+                <h2 class="section-title" itemprop="name"><i class="fas fa-folder-open"></i> Категории ошибок</h2>
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Категории будут добавлены через JavaScript -->
+                </div>
+            </section>
+
+            <!-- Подкатегории -->
+            <section class="category-errors hidden" id="subcategoriesSection">
+                <nav class="breadcrumb" aria-label="Хлебные крошки" id="breadcrumb"></nav>
+                <div class="category-header">
+                    <div class="category-title">
+                        <h2 class="section-title" id="categoryTitle"><i class="fab fa-windows"></i> Ошибки Windows</h2>
+                    </div>
+                    <a href="/" class="back-btn" id="backToCategories"><i class="fas fa-arrow-left"></i> Назад</a>
+                </div>
+                <div class="subcategories-grid" id="subcategoriesGrid">
+                    <!-- Подкатегории будут добавлены через JavaScript -->
+                </div>
+            </section>
+
+            <!-- Список ошибок -->
+            <section class="category-errors hidden" id="errorsSection">
+                <nav class="breadcrumb" aria-label="Хлебные крошки" id="errorsBreadcrumb"></nav>
+                <div class="category-header">
+                    <div class="category-title">
+                        <h2 class="section-title" id="errorsTitle"><i class="fab fa-windows"></i> Ошибки Windows</h2>
+                    </div>
+                    <a href="#" class="back-btn" id="backToSubcategories"><i class="fas fa-arrow-left"></i> Назад</a>
+                </div>
+                
+                <div class="errors-list" id="errorsList">
+                    <!-- Ошибки будут добавлены через JavaScript -->
+                </div>
+                <div class="pagination" id="pagination" role="navigation" aria-label="Пагинация">
+                    <!-- Пагинация будет добавлена через JavaScript -->
+                </div>
+            </section>
+
+            <!-- Детальная информация об ошибке -->
+            <section class="error-detail hidden" id="errorDetailSection" itemscope itemtype="https://schema.org/TechArticle">
+                <nav class="breadcrumb" aria-label="Хлебные крошки" id="detailBreadcrumb"></nav>
+                <div class="error-header">
+                    <div>
+                        <div class="error-code-large" id="errorDetailCode" itemprop="headline">0x80070005</div>
+                        <div class="error-title-large" id="errorDetailTitle" itemprop="alternativeHeadline">Ошибка доступа</div>
+                        <div class="quick-actions">
+                            <button class="action-btn" id="copyErrorCode">
+                                <i class="fas fa-copy"></i> Копировать ошибку
+                            </button>
+                            <button class="action-btn" id="shareError">
+                                <i class="fas fa-share"></i> Поделиться
+                            </button>
+                        </div>
+                    </div>
+                    <span id="errorDetailCategory" class="category-tag" itemprop="about">Windows</span>
+                </div>
+                
+                <div class="error-content">
+                    <div itemprop="articleBody">
+                        <p class="error-description" id="errorDetailDescription">
+                            Загрузка описания ошибки...
+                        </p>
+                        
+                        <div class="solutions-container">
+                            <h4 class="solutions-title"><i class="fas fa-tools"></i> Способы решения:</h4>
+                            <div id="errorSolutions">
+                                <!-- Решения будут добавлены через JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="additional-info">
+                        <h4><i class="fas fa-info-circle"></i> Дополнительная информация:</h4>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <strong>Система:</strong>
+                                <span id="errorSystem" itemprop="operatingSystem">Загрузка...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Срочность:</strong>
+                                <span id="errorUrgency" class="urgency-medium">Загрузка...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Частота:</strong>
+                                <span id="errorFrequency">Загрузка...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Последнее обновление:</strong>
+                                <span id="errorLastUpdate" itemprop="datePublished">1 октября 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 0 30px 30px;">
+                    <a href="#" class="back-btn" id="backToErrors"><i class="fas fa-arrow-left"></i> Назад к списку</a>
+                </div>
+            </section>
+
+            <!-- Сообщение о отсутствии результатов -->
+            <div class="no-results hidden" id="noResults">
+                <i class="fas fa-search" style="font-size: 48px;"></i>
+                <h3>Ошибка не найдена</h3>
+                <p>Попробуйте другой код ошибки или выберите из категорий</p>
+            </div>
+
+            <!-- Сообщение о загрузке -->
+            <div class="loading hidden" id="loadingSection">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <p>Загрузка базы данных...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2024 ErrorFOXbase. База знаний по ошибкам и решениям. Все права защищены.</p>
+            <div class="footer-links">
+                <a href="/about"><i class="fas fa-info-circle"></i> О проекте</a>
+                <a href="/contact"><i class="fas fa-envelope"></i> Контакты</a>
+                <a href="/privacy"><i class="fas fa-shield-alt"></i> Политика конфиденциальности</a>
+                <a href="/terms"><i class="fas fa-file-contract"></i> Пользовательское соглашение</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
