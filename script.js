@@ -1,3 +1,352 @@
+// Класс для работы с пользовательскими настройками
+class UserPreferences {
+    constructor() {
+        this.history = [];
+        this.theme = 'light';
+        this.likes = new Map();
+        this.feedbackCounts = new Map();
+        this.loadPreferences();
+    }
+
+    toggleLike(errorCode, solutionIndex) {
+        const key = `${errorCode}-${solutionIndex}`;
+        const isLiked = this.likes.get(key) || false;
+        
+        if (isLiked) {
+            this.likes.delete(key);
+            const currentCount = this.feedbackCounts.get(key) || 0;
+            this.feedbackCounts.set(key, Math.max(0, currentCount - 1));
+        } else {
+            this.likes.set(key, true);
+            const currentCount = this.feedbackCounts.get(key) || 0;
+            this.feedbackCounts.set(key, currentCount + 1);
+        }
+        
+        this.savePreferences();
+        return !isLiked;
+    }
+
+    isLiked(errorCode, solutionIndex) {
+        const key = `${errorCode}-${solutionIndex}`;
+        return this.likes.get(key) || false;
+    }
+
+    getFeedbackCount(errorCode, solutionIndex) {
+        const key = `${errorCode}-${solutionIndex}`;
+        return this.feedbackCounts.get(key) || 0;
+    }
+
+    addToHistory(error) {
+        this.history = this.history.filter(item => item.code !== error.code);
+        this.history.unshift({
+            code: error.code,
+            title: error.title,
+            category: error.category,
+            timestamp: new Date().toISOString()
+        });
+        this.history = this.history.slice(0, 20);
+        this.savePreferences();
+    }
+
+    getHistory() {
+        return this.history;
+    }
+
+    clearHistory() {
+        this.history = [];
+        this.savePreferences();
+    }
+
+    setTheme(theme) {
+        this.theme = theme;
+        this.savePreferences();
+    }
+
+    getTheme() {
+        return this.theme;
+    }
+
+    savePreferences() {
+        localStorage.setItem('errorfoxbase_prefs', JSON.stringify({
+            history: this.history,
+            theme: this.theme,
+            likes: Array.from(this.likes.entries()),
+            feedbackCounts: Array.from(this.feedbackCounts.entries())
+        }));
+    }
+
+    loadPreferences() {
+        try {
+            const prefs = JSON.parse(localStorage.getItem('errorfoxbase_prefs') || '{}');
+            this.history = prefs.history || [];
+            this.theme = prefs.theme || 'light';
+            this.likes = new Map(prefs.likes || []);
+            this.feedbackCounts = new Map(prefs.feedbackCounts || []);
+        } catch (error) {
+            console.error('Ошибка загрузки настроек:', error);
+            this.history = [];
+            this.theme = 'light';
+            this.likes = new Map();
+            this.feedbackCounts = new Map();
+        }
+    }
+}
+
+// Класс для работы с базой данных ErrorFOXbase
+class ErrorDatabaseService {
+    constructor() {
+        this.categories = new Map();
+        this.subcategories = new Map();
+        this.errors = new Map();
+        this.isLoaded = false;
+    }
+
+    async initialize() {
+        try {
+            this.showLoading();
+            
+            // Загружаем данные из внешних JSON файлов
+            const [categoriesData, subcategoriesData, errorsData] = await Promise.all([
+                this.loadJSON('categories.json'),
+                this.loadJSON('subcategories.json'), 
+                this.loadJSON('errors.json')
+            ]);
+
+            // Обрабатываем категории
+            this.categories = new Map();
+            for (const [id, category] of Object.entries(categoriesData)) {
+                this.categories.set(id, category);
+            }
+
+            // Обрабатываем подкатегории  
+            this.subcategories = new Map();
+            for (const [categoryId, subcats] of Object.entries(subcategoriesData)) {
+                this.subcategories.set(categoryId, subcats);
+            }
+
+            // Обрабатываем ошибки - убираем дубликаты
+            this.errors = new Map();
+            const seenCodes = new Set();
+            
+            for (const [code, error] of Object.entries(errorsData)) {
+                if (seenCodes.has(code)) {
+                    console.warn(`Дубликат ошибки ${code} пропущен`);
+                    continue;
+                }
+                seenCodes.add(code);
+                
+                // Нормализуем данные ошибки
+                const normalizedError = this.normalizeError(error);
+                this.errors.set(code, normalizedError);
+            }
+            
+            this.isLoaded = true;
+            console.log(`Загружено: ${this.categories.size} категорий, ${this.errors.size} ошибок`);
+            this.hideLoading();
+            return true;
+        } catch (error) {
+            console.error('Ошибка загрузки базы данных:', error);
+            this.hideLoading();
+            this.showErrorMessage('Не удалось загрузить базу данных. Проверьте наличие файлов JSON.');
+            return false;
+        }
+    }
+
+    // Нормализация данных ошибки для совместимости с кодом
+    normalizeError(error) {
+        const normalized = { ...error };
+        
+        // Нормализуем риск в решениях
+        if (normalized.solutions) {
+            normalized.solutions = normalized.solutions.map(solution => ({
+                ...solution,
+                risk: this.normalizeRisk(solution.risk)
+            }));
+        }
+        
+        return normalized;
+    }
+
+    // Конвертация риска из русского в английский
+    normalizeRisk(risk) {
+        const riskMap = {
+            'низкий': 'low',
+            'средний': 'medium', 
+            'высокий': 'high',
+            'low': 'low',
+            'medium': 'medium',
+            'high': 'high'
+        };
+        return riskMap[risk] || 'low';
+    }
+
+    async loadJSON(filename) {
+        try {
+            const response = await fetch(filename);
+            if (!response.ok) {
+                throw new Error(`Не удалось загрузить ${filename}: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Ошибка загрузки ${filename}:`, error);
+            // Возвращаем пустые данные вместо падения приложения
+            return this.getFallbackData(filename);
+        }
+    }
+
+    getFallbackData(filename) {
+        const fallbacks = {
+            'categories.json': {},
+            'subcategories.json': {},
+            'errors.json': {}
+        };
+        return fallbacks[filename] || {};
+    }
+
+    showLoading() {
+        document.getElementById('loadingSection').classList.remove('hidden');
+        this.hideAllSections();
+    }
+
+    hideLoading() {
+        document.getElementById('loadingSection').classList.add('hidden');
+    }
+
+    showErrorMessage(message) {
+        const statsSection = document.getElementById('statsSection');
+        statsSection.innerHTML = `
+            <div class="no-results" style="grid-column: 1 / -1;">
+                <i class="fas fa-exclamation-triangle" style="font-size: 48px;"></i>
+                <h3>Ошибка загрузки</h3>
+                <p>${message}</p>
+            </div>
+        `;
+    }
+
+    hideAllSections() {
+        document.getElementById('categoriesSection').classList.add('hidden');
+        document.getElementById('subcategoriesSection').classList.add('hidden');
+        document.getElementById('errorsSection').classList.add('hidden');
+        document.getElementById('errorDetailSection').classList.add('hidden');
+        document.getElementById('noResults').classList.add('hidden');
+        document.getElementById('statsSection').classList.add('hidden');
+    }
+
+    getError(code) {
+        return this.errors.get(code);
+    }
+
+    getErrorsByCategory(category) {
+        return Array.from(this.errors.values())
+            .filter(error => error.category === category);
+    }
+
+    getErrorsBySubcategory(category, subcategoryName) {
+        return Array.from(this.errors.values())
+            .filter(error => 
+                error.category === category && 
+                error.subcategory === subcategoryName
+            );
+    }
+
+    searchErrors(query) {
+        const lowercaseQuery = query.toLowerCase();
+        return Array.from(this.errors.values())
+            .filter(error => 
+                error.code.toLowerCase().includes(lowercaseQuery) ||
+                error.title.toLowerCase().includes(lowercaseQuery) ||
+                error.description.toLowerCase().includes(lowercaseQuery) ||
+                error.category.toLowerCase().includes(lowercaseQuery)
+            );
+    }
+
+    getCategoryInfo(category) {
+        return this.categories.get(category);
+    }
+
+    getSubcategories(category) {
+        return this.subcategories.get(category) || [];
+    }
+
+    getTotalErrorsCount() {
+        return this.errors.size;
+    }
+
+    getTotalSolutionsCount() {
+        let total = 0;
+        for (const error of this.errors.values()) {
+            total += error.solutions?.length || 0;
+        }
+        return total;
+    }
+}
+
+// Класс для управления уведомлениями
+class ToastManager {
+    constructor() {
+        this.container = document.getElementById('toastContainer');
+    }
+
+    show(message, type = 'success', duration = 3000) {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}"></i>
+            <span>${message}</span>
+        `;
+
+        this.container.appendChild(toast);
+
+        setTimeout(() => toast.classList.add('show'), 10);
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, duration);
+    }
+}
+
+// СЕРВИС АНАЛИТИКИ
+class AnalyticsService {
+    constructor() {
+        this.enabled = !window.location.hostname.includes('localhost');
+    }
+
+    trackEvent(category, action, label) {
+        if (!this.enabled) return;
+
+        try {
+            // Google Analytics 4
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, {
+                    event_category: category,
+                    event_label: label
+                });
+            }
+
+            // Console log для разработки
+            console.log(`Analytics: ${category} - ${action} - ${label}`);
+
+            // Отправка на собственный сервер
+            this.sendToServer({ category, action, label });
+        } catch (error) {
+            console.warn('Analytics error:', error);
+        }
+    }
+
+    sendToServer(data) {
+        if (!navigator.onLine) return;
+
+        // В реальном приложении здесь был бы fetch на ваш сервер
+        // fetch('/api/analytics', { method: 'POST', body: JSON.stringify(data) })
+        console.log('Analytics data:', data);
+    }
+}
+
 // ErrorFOXbase - Полная реализация с улучшениями
 class ErrorFOXbaseApp {
     constructor() {
@@ -95,7 +444,11 @@ class ErrorFOXbaseApp {
                 });
             });
             
-            document.getElementById('headerActions').appendChild(installButton);
+            // Добавляем кнопку в header actions если есть место
+            const headerActions = document.getElementById('headerActions');
+            if (headerActions) {
+                headerActions.appendChild(installButton);
+            }
         });
     }
 
@@ -1080,52 +1433,6 @@ class ErrorFOXbaseApp {
     }
 }
 
-// СЕРВИС АНАЛИТИКИ
-class AnalyticsService {
-    constructor() {
-        this.enabled = !window.location.hostname.includes('localhost');
-    }
-
-    trackEvent(category, action, label) {
-        if (!this.enabled) return;
-
-        try {
-            // Google Analytics 4
-            if (typeof gtag !== 'undefined') {
-                gtag('event', action, {
-                    event_category: category,
-                    event_label: label
-                });
-            }
-
-            // Console log для разработки
-            console.log(`Analytics: ${category} - ${action} - ${label}`);
-
-            // Отправка на собственный сервер
-            this.sendToServer({ category, action, label });
-        } catch (error) {
-            console.warn('Analytics error:', error);
-        }
-    }
-
-    sendToServer(data) {
-        if (!navigator.onLine) return;
-
-        fetch('/api/analytics', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                ...data,
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                url: window.location.href
-            })
-        }).catch(() => {
-            // Игнорируем ошибки отправки аналитики
-        });
-    }
-}
-
 // ИНИЦИАЛИЗАЦИЯ ПРИЛОЖЕНИЯ
 document.addEventListener('DOMContentLoaded', () => {
     // Проверка поддержки современных возможностей
@@ -1155,4 +1462,4 @@ if ('serviceWorker' in navigator) {
                 console.log('ServiceWorker registration failed: ', err);
             });
     });
-    }
+            }
