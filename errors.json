@@ -1276,5 +1276,1531 @@
     "frequency": "Высокая",
     "lastUpdate": "03.10.2025",
     "userAction": "требуется"
+  },
+
+  "0x80073CF0": {
+    "code": "0x80073CF0",
+    "title": "Ошибка установки приложения - Deployment failed",
+    "description": "Эта ошибка возникает при установке приложений из Microsoft Store когда система не может корректно развернуть пакет приложения. Проблема может быть связана с повреждением кэша Store, конфликтами прав доступа или проблемами с учетной записью Microsoft.",
+    "causes": [
+      "Повреждение кэша Microsoft Store",
+      "Проблемы с правами доступа к системным папкам",
+      "Конфликт с установленными версиями приложения",
+      "Ошибки в работе службы лицензирования",
+      "Проблемы с учетной записью Microsoft"
+    ],
+    "category": "windows",
+    "subcategory": "Microsoft Store",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Сброс кэша Microsoft Store",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "description": "Очистка кэша Store часто решает проблемы с установкой приложений.",
+        "steps": [
+          "Нажмите Win + R, введите wsreset.exe и нажмите Enter",
+          "Дождитесь очистки кэша магазина",
+          "Перезагрузите компьютер",
+          "Попробуйте установить приложение снова"
+        ]
+      }
+    ],
+    "system": "Windows 10/11",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "0x80070005": {
+    "code": "0x80070005",
+    "title": "Ошибка активации Windows - Access Denied",
+    "description": "Ошибка возникает при активации Windows когда система не может проверить лицензию из-за недостаточных прав или проблем с серверами активации.",
+    "causes": [
+      "Отсутствие прав администратора",
+      "Блокировка серверов активации брандмауэром",
+      "Проблемы с цифровой лицензией",
+      "Нестабильное интернет-соединение"
+    ],
+    "category": "windows",
+    "subcategory": "Активация",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Запуск активации от имени администратора",
+        "time": "2 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Откройте командную строку от имени администратора",
+          "Введите: slmgr /ato и нажмите Enter",
+          "Дождитесь завершения процесса активации"
+        ]
+      }
+    ],
+    "system": "Windows 10/11",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "0x80090016": {
+    "code": "0x80090016",
+    "title": "Ошибка безопасности - Key not valid for use in specified state",
+    "description": "Ошибка возникает когда система безопасности Windows не может использовать криптографические ключи для защиты данных.",
+    "causes": [
+      "Повреждение хранилища ключей",
+      "Конфликт политик безопасности",
+      "Проблемы с TPM модулем",
+      "Повреждение системных файлов безопасности"
+    ],
+    "category": "windows",
+    "subcategory": "Безопасность",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Восстановление хранилища ключей",
+        "time": "10 минут",
+        "risk": "средний",
+        "steps": [
+          "Откройте управление сертификатами (certmgr.msc)",
+          "Удалите поврежденные сертификаты",
+          "Перезапустите службу Key Management Service",
+          "Выполните: sfc /scannow"
+        ]
+      }
+    ],
+    "system": "Windows 10/11",
+    "urgency": "high",
+    "frequency": "Низкая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "KERNEL_PANIC": {
+    "code": "KERNEL_PANIC",
+    "title": "Паника ядра - System halted",
+    "description": "Критическая ошибка ядра Linux которая приводит к полной остановке системы. Ядро обнаружило неустранимую ошибку и не может продолжать работу.",
+    "causes": [
+      "Повреждение памяти (RAM)",
+      "Ошибки в драйверах устройств",
+      "Повреждение системных файлов ядра",
+      "Аппаратные сбои",
+      "Перегрев компонентов"
+    ],
+    "category": "linux",
+    "subcategory": "Ошибки ядра",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Анализ логов и восстановление",
+        "time": "15 минут",
+        "risk": "высокий",
+        "steps": [
+          "Проверьте системные логи: journalctl -b -1",
+          "Протестируйте оперативную память: memtester",
+          "Обновите ядро системы",
+          "Проверьте целостность системных файлов"
+        ]
+      }
+    ],
+    "system": "Linux/Unix",
+    "urgency": "high",
+    "frequency": "Низкая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "DPKG_LOCKED": {
+    "code": "DPKG_LOCKED",
+    "title": "Пакетный менеджер заблокирован - Could not get lock",
+    "description": "Ошибка возникает когда пакетный менеджер apt/dpkg не может получить эксклюзивный доступ к системным файлам потому что другой процесс уже использует их.",
+    "causes": [
+      "Другой процесс apt/dpkg уже запущен",
+      "Незавершенная установка пакетов",
+      "Повреждение блокировочных файлов",
+      "Аварийное завершение процесса установки"
+    ],
+    "category": "linux",
+    "subcategory": "Ошибки пакетов",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Очистка блокировок пакетного менеджера",
+        "time": "2 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Выполните: sudo killall apt apt-get",
+          "Удалите файлы блокировок: sudo rm /var/lib/dpkg/lock*",
+          "Очистите кэш: sudo apt clean",
+          "Попробуйте выполнить команду снова"
+        ]
+      }
+    ],
+    "system": "Ubuntu/Debian",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "403": {
+    "code": "403",
+    "title": "Доступ запрещен - Forbidden",
+    "description": "Сервер понял запрос но отказывается его авторизовать. В отличие от 401 ошибки, аутентификация не поможет.",
+    "causes": [
+      "Ограничения в файле .htaccess",
+      "Неправильные права доступа к файлам",
+      "Блокировка по IP-адресу",
+      "Ограничения в конфигурации сервера"
+    ],
+    "category": "http",
+    "subcategory": "Клиентские ошибки (4xx)",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка URL и прав доступа",
+        "time": "2 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Проверьте правильность URL адреса",
+          "Убедитесь что у вас есть права на просмотр ресурса",
+          "Очистите кэш браузера",
+          "Попробуйте другой браузер"
+        ]
+      }
+    ],
+    "system": "Все браузеры",
+    "urgency": "low",
+    "frequency": "Высокая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "503": {
+    "code": "503",
+    "title": "Сервис недоступен - Service Unavailable",
+    "description": "Сервер временно не может обработать запрос due to overload или технического обслуживания.",
+    "causes": [
+      "Перегрузка сервера",
+      "Техническое обслуживание",
+      "Проблемы с балансировщиком нагрузки",
+      "Ошибки в конфигурации сервера"
+    ],
+    "category": "http",
+    "subcategory": "Серверные ошибки (5xx)",
+    "audience": ["beginner"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Ожидание и повторная попытка",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Подождите несколько минут и обновите страницу",
+          "Проверьте статус сервиса на официальной странице",
+          "Попробуйте позже в непиковое время"
+        ]
+      }
+    ],
+    "system": "Все браузеры",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "ожидание"
+  },
+
+  "ERR_NAME_NOT_RESOLVED": {
+    "code": "ERR_NAME_NOT_RESOLVED",
+    "title": "Не удается найти DNS-адрес сервера",
+    "description": "Браузер не может преобразовать доменное имя в IP-адрес через DNS сервер.",
+    "causes": [
+      "Проблемы с DNS сервером",
+      "Ошибки в настройках сети",
+      "Блокировка домена",
+      "Проблемы с интернет-соединением"
+    ],
+    "category": "network",
+    "subcategory": "DNS ошибки",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Смена DNS серверов",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Используйте DNS Google: 8.8.8.8 и 8.8.4.4",
+          "Очистите DNS кэш: ipconfig /flushdns",
+          "Перезагрузите роутер"
+        ]
+      }
+    ],
+    "system": "Chrome, Edge, Firefox",
+    "urgency": "medium",
+    "frequency": "Высокая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "WIFI_NO_INTERNET": {
+    "code": "WIFI_NO_INTERNET",
+    "title": "Wi-Fi подключен но нет интернета",
+    "description": "Устройство подключено к Wi-Fi сети но доступ к интернету отсутствует.",
+    "causes": [
+      "Проблемы с маршрутизатором",
+      "Неверные настройки DNS",
+      "Блокировка провайдером",
+      "Проблемы с кабельным подключением"
+    ],
+    "category": "network",
+    "subcategory": "Wi-Fi подключение",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Перезагрузка сетевого оборудования",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Перезагрузите роутер и модем",
+          "Проверьте подключение других устройств",
+          "Переподключитесь к Wi-Fi сети"
+        ]
+      }
+    ],
+    "system": "Windows, Android, iOS",
+    "urgency": "medium",
+    "frequency": "Высокая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "OUT_OF_MEMORY": {
+    "code": "OUT_OF_MEMORY",
+    "title": "Недостаточно памяти",
+    "description": "Приложению не хватает оперативной памяти для выполнения операции.",
+    "causes": [
+      "Слишком много запущенных приложений",
+      "Утечки памяти в программах",
+      "Недостаточный объем RAM",
+      "Большой размер рабочих файлов"
+    ],
+    "category": "software",
+    "subcategory": "Microsoft Office",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Освобождение памяти",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Закройте ненужные приложения",
+          "Сохраните работу и перезапустите программу",
+          "Увеличьте файл подкачки"
+        ]
+      }
+    ],
+    "system": "Windows, macOS",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "BLUE_SCREEN_CRITICAL_PROCESS_DIED": {
+    "code": "CRITICAL_PROCESS_DIED",
+    "title": "Критический процесс системы прекратил работу",
+    "description": "Синий экран возникает когда критически важный системный процесс неожиданно завершается.",
+    "causes": [
+      "Повреждение системных файлов",
+      "Проблемы с драйверами",
+      "Конфликты программного обеспечения",
+      "Аппаратные сбои"
+    ],
+    "category": "windows",
+    "subcategory": "Синий экран (BSOD)",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Восстановление системных файлов",
+        "time": "20 минут",
+        "risk": "средний",
+        "steps": [
+          "Запустите sfc /scannow",
+          "Выполните DISM /Online /Cleanup-Image /RestoreHealth",
+          "Проверьте дамп памяти для анализа"
+        ]
+      }
+    ],
+    "system": "Windows 10/11",
+    "urgency": "high",
+    "frequency": "Низкая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "DISK_BOOT_FAILURE": {
+    "code": "DISK_BOOT_FAILURE",
+    "title": "Ошибка загрузки с диска",
+    "description": "BIOS/UEFI не может найти загрузочное устройство при старте системы.",
+    "causes": [
+      "Неправильный порядок загрузки в BIOS",
+      "Повреждение загрузочной записи",
+      "Отказ жесткого диска",
+      "Проблемы с кабелями подключения"
+    ],
+    "category": "hardware",
+    "subcategory": "Накопители",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка настроек BIOS",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Войдите в BIOS/UEFI при загрузке",
+          "Проверьте порядок загрузочных устройств",
+          "Убедитесь что системный диск определяется"
+        ]
+      }
+    ],
+    "system": "Все системы",
+    "urgency": "high",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "MYSQL_CONNECTION_ERROR": {
+    "code": "MYSQL_CONNECTION_ERROR",
+    "title": "Ошибка подключения к MySQL",
+    "description": "Приложение не может установить соединение с базой данных MySQL.",
+    "causes": [
+      "Сервер MySQL не запущен",
+      "Неверные параметры подключения",
+      "Блокировка брандмауэром",
+      "Превышено максимальное число соединений"
+    ],
+    "category": "database",
+    "subcategory": "MySQL ошибки",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Проверка службы MySQL",
+        "time": "5 минут",
+        "risk": "средний",
+        "steps": [
+          "Проверьте статус службы MySQL",
+          "Убедитесь в правильности host, user, password",
+          "Проверьте настройки брандмауэра"
+        ]
+      }
+    ],
+    "system": "MySQL",
+    "urgency": "high",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "SSL_CERTIFICATE_ERROR": {
+    "code": "SSL_CERTIFICATE_ERROR",
+    "title": "Ошибка SSL сертификата",
+    "description": "Браузер не может проверить подлинность SSL сертификата сайта.",
+    "causes": [
+      "Просроченный сертификат",
+      "Несовпадение имени домена",
+      "Самоподписанный сертификат",
+      "Проблемы с системным временем"
+    ],
+    "category": "security",
+    "subcategory": "SSL ошибки",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка даты и времени",
+        "time": "2 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Проверьте правильность системной даты и времени",
+          "Обновите страницу",
+          "Попробуйте другой браузер"
+        ]
+      }
+    ],
+    "system": "Все браузеры",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "IE_SCRIPT_ERROR": {
+    "code": "IE_SCRIPT_ERROR",
+    "title": "Ошибка выполнения скрипта",
+    "description": "Internet Explorer сталкивается с ошибками при выполнении JavaScript кода.",
+    "causes": [
+      "Несовместимость кода с версией IE",
+      "Ошибки в JavaScript коде",
+      "Блокировка активного содержимого",
+      "Устаревшие компоненты браузера"
+    ],
+    "category": "browser",
+    "subcategory": "Internet Explorer",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Настройка параметров безопасности",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Добавьте сайт в доверенные узлы",
+          "Включите выполнение скриптов",
+          "Обновите браузер до последней версии"
+        ]
+      }
+    ],
+    "system": "Internet Explorer",
+    "urgency": "low",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "XBOX_LIVE_CONNECTION": {
+    "code": "XBOX_LIVE_CONNECTION",
+    "title": "Ошибка подключения к Xbox Live",
+    "description": "Не удается установить соединение с серверами Xbox Live.",
+    "causes": [
+      "Проблемы с интернет-соединением",
+      "Технические работы на серверах",
+      "Проблемы с учетной записью Microsoft",
+      "Ограничения NAT типа"
+    ],
+    "category": "gaming",
+    "subcategory": "Xbox",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка сетевого подключения",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Проверьте подключение к интернету",
+          "Перезагрузите консоль и роутер",
+          "Проверьте статус сервисов Xbox Live"
+        ]
+      }
+    ],
+    "system": "Xbox One/Series",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "0x8007000E": {
+    "code": "0x8007000E",
+    "title": "Недостаточно памяти - Out of memory",
+    "description": "Системе не хватает виртуальной памяти для выполнения операции.",
+    "causes": [
+      "Мало оперативной памяти",
+      "Слишком много запущенных приложений",
+      "Недостаточный размер файла подкачки",
+      "Утечки памяти в приложениях"
+    ],
+    "category": "windows",
+    "subcategory": "Производительность",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Освобождение памяти",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Закройте ненужные приложения",
+          "Увеличьте размер файла подкачки",
+          "Добавьте оперативной памяти"
+        ]
+      }
+    ],
+    "system": "Windows 10/11",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "FILE_SYSTEM_CORRUPT": {
+    "code": "FILE_SYSTEM_CORRUPT",
+    "title": "Файловая система повреждена",
+    "description": "Обнаружены ошибки в структуре файловой системы Linux.",
+    "causes": [
+      "Неправильное выключение системы",
+      "Сбои питания",
+      "Аппаратные ошибки диска",
+      "Повреждение суперблока"
+    ],
+    "category": "linux",
+    "subcategory": "Файловая система",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Проверка и восстановление файловой системы",
+        "time": "30 минут",
+        "risk": "высокий",
+        "steps": [
+          "Загрузитесь с live CD",
+          "Выполните fsck для проверки",
+          "Восстановите суперблок при необходимости"
+        ]
+      }
+    ],
+    "system": "Linux/Unix",
+    "urgency": "high",
+    "frequency": "Низкая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "401": {
+    "code": "401",
+    "title": "Неавторизован - Unauthorized",
+    "description": "Требуется аутентификация для доступа к ресурсу.",
+    "causes": [
+      "Неверные учетные данные",
+      "Истекшая сессия",
+      "Отсутствие токена аутентификации",
+      "Ограничения доступа"
+    ],
+    "category": "http",
+    "subcategory": "Клиентские ошибки (4xx)",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка учетных данных",
+        "time": "2 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Убедитесь в правильности логина и пароля",
+          "Очистите cookies браузера",
+          "Попробуйте войти снова"
+        ]
+      }
+    ],
+    "system": "Все браузеры",
+    "urgency": "low",
+    "frequency": "Высокая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "NETWORK_CABLE_UNPLUGGED": {
+    "code": "NETWORK_CABLE_UNPLUGGED",
+    "title": "Сетевой кабель не подключен",
+    "description": "Система не обнаруживает подключение сетевого кабеля.",
+    "causes": [
+      "Физическое отключение кабеля",
+      "Неисправность сетевой карты",
+      "Проблемы с роутером/коммутатором",
+      "Обрыв кабеля"
+    ],
+    "category": "network",
+    "subcategory": "Интернет подключение",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка физического подключения",
+        "time": "2 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Проверьте подключение кабеля к компьютеру и роутеру",
+          "Попробуйте другой сетевой порт",
+          "Проверьте индикаторы сетевой карты"
+        ]
+      }
+    ],
+    "system": "Windows, Linux",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "VISUAL_STUDIO_COMPILER_ERROR": {
+    "code": "VISUAL_STUDIO_COMPILER_ERROR",
+    "title": "Ошибка компиляции",
+    "description": "Visual Studio не может скомпилировать проект из-за ошибок в коде или настройках.",
+    "causes": [
+      "Синтаксические ошибки в коде",
+      "Отсутствующие зависимости",
+      "Неправильные настройки проекта",
+      "Проблемы с пакетами NuGet"
+    ],
+    "category": "software",
+    "subcategory": "Инструменты разработки",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Анализ ошибок компиляции",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Проверьте список ошибок в Output window",
+          "Восстановите пакеты NuGet",
+          "Очистите и пересоберите решение"
+        ]
+      }
+    ],
+    "system": "Visual Studio",
+    "urgency": "medium",
+    "frequency": "Высокая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "MEMORY_MANAGEMENT": {
+    "code": "MEMORY_MANAGEMENT",
+    "title": "Ошибка управления памятью",
+    "description": "Синий экран вызван проблемами в работе с оперативной памятью.",
+    "causes": [
+      "Неисправные модули RAM",
+      "Несовместимость памяти",
+      "Ошибки в драйверах",
+      "Повреждение системных файлов"
+    ],
+    "category": "hardware",
+    "subcategory": "Оперативная память",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Диагностика оперативной памяти",
+        "time": "30 минут",
+        "risk": "средний",
+        "steps": [
+          "Запустите Windows Memory Diagnostic",
+          "Проверьте модули памяти по одному",
+          "Обновите драйверы чипсета"
+        ]
+      }
+    ],
+    "system": "Windows 10/11",
+    "urgency": "high",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "POSTGRES_CONNECTION_REFUSED": {
+    "code": "POSTGRES_CONNECTION_REFUSED",
+    "title": "Подключение к PostgreSQL отклонено",
+    "description": "Клиент не может подключиться к серверу PostgreSQL.",
+    "causes": [
+      "Сервер PostgreSQL не запущен",
+      "Неверные параметры подключения",
+      "Блокировка брандмауэром",
+      "Достигнут лимит соединений"
+    ],
+    "category": "database",
+    "subcategory": "PostgreSQL ошибки",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Проверка службы PostgreSQL",
+        "time": "5 минут",
+        "risk": "средний",
+        "steps": [
+          "Проверьте статус службы postgresql",
+          "Убедитесь что сервер слушает правильный порт",
+          "Проверьте pg_hba.conf настройки"
+        ]
+      }
+    ],
+    "system": "PostgreSQL",
+    "urgency": "high",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "ACCESS_DENIED_SECURITY": {
+    "code": "ACCESS_DENIED_SECURITY",
+    "title": "Доступ запрещен политикой безопасности",
+    "description": "Попытка доступа к ресурсу заблокирована политиками безопасности.",
+    "causes": [
+      "Ограничения групповых политик",
+      "Отсутствие необходимых прав",
+      "Блокировка антивирусом",
+      "Настройки контроля учетных записей"
+    ],
+    "category": "security",
+    "subcategory": "Контроль доступа",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Проверка политик безопасности",
+        "time": "10 минут",
+        "risk": "высокий",
+        "steps": [
+          "Проверьте настройки групповых политик",
+          "Убедитесь в наличии необходимых прав",
+          "Проверьте журналы безопасности"
+        ]
+      }
+    ],
+    "system": "Windows",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "CHROME_OUT_OF_MEMORY": {
+    "code": "CHROME_OUT_OF_MEMORY",
+    "title": "В Chrome закончилась память",
+    "description": "Браузер Chrome исчерпал доступную память и не может загрузить страницу.",
+    "causes": [
+      "Слишком много открытых вкладок",
+      "Утечки памяти в расширениях",
+      "Большие веб-приложения",
+      "Недостаток оперативной памяти"
+    ],
+    "category": "software",
+    "subcategory": "Веб-браузеры",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Освобождение памяти браузера",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Закройте неиспользуемые вкладки",
+          "Отключите проблемные расширения",
+          "Очистите кэш браузера"
+        ]
+      }
+    ],
+    "system": "Google Chrome",
+    "urgency": "medium",
+    "frequency": "Высокая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "XBOX_GAME_INSTALL_ERROR": {
+    "code": "XBOX_GAME_INSTALL_ERROR",
+    "title": "Ошибка установки игры на Xbox",
+    "description": "Не удается установить игру на консоль Xbox.",
+    "causes": [
+      "Недостаточно места на диске",
+      "Проблемы с подключением к Xbox Live",
+      "Повреждение файлов загрузки",
+      "Ошибки жесткого диска"
+    ],
+    "category": "gaming",
+    "subcategory": "Xbox",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Освобождение места на диске",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Удалите ненужные игры и приложения",
+          "Проверьте свободное место на диске",
+          "Перезагрузите консоль"
+        ]
+      }
+    ],
+    "system": "Xbox One/Series",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "ONEDRIVE_SYNC_ERROR": {
+    "code": "ONEDRIVE_SYNC_ERROR",
+    "title": "Ошибка синхронизации OneDrive",
+    "description": "Не удается синхронизировать файлы с облачным хранилищем OneDrive.",
+    "causes": [
+      "Проблемы с интернет-соединением",
+      "Конфликты имен файлов",
+      "Недостаточно места в облаке",
+      "Ограничения политик организации"
+    ],
+    "category": "windows",
+    "subcategory": "Облачные службы",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Перезапуск синхронизации",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Перезапустите приложение OneDrive",
+          "Проверьте подключение к интернету",
+          "Убедитесь в достаточном месте в облаке"
+        ]
+      }
+    ],
+    "system": "Windows 10/11",
+    "urgency": "low",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "KERNEL_MODULE_ERROR": {
+    "code": "KERNEL_MODULE_ERROR",
+    "title": "Ошибка загрузки модуля ядра",
+    "description": "Система не может загрузить необходимый модуль ядра Linux.",
+    "causes": [
+      "Несовместимость версий модуля",
+      "Отсутствие зависимостей",
+      "Повреждение файлов модуля",
+      "Конфликты с другими модулями"
+    ],
+    "category": "linux",
+    "subcategory": "Ошибки ядра",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Пересборка модулей ядра",
+        "time": "10 минут",
+        "risk": "высокий",
+        "steps": [
+          "Проверьте логи загрузки модуля",
+          "Пересоберите модули из исходных кодов",
+          "Обновите ядро системы"
+        ]
+      }
+    ],
+    "system": "Linux",
+    "urgency": "high",
+    "frequency": "Низкая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "429": {
+    "code": "429",
+    "title": "Слишком много запросов - Too Many Requests",
+    "description": "Пользователь отправил слишком много запросов за короткое время.",
+    "causes": [
+      "Автоматические скрипты и боты",
+      "Повторяющиеся ручные запросы",
+      "DDoS атака на сервер",
+      "Ограничения API"
+    ],
+    "category": "http",
+    "subcategory": "Клиентские ошибки (4xx)",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Ожидание и повторная попытка",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Подождите несколько минут",
+          "Убедитесь что вы не используете автоматические скрипты",
+          "Попробуйте позже"
+        ]
+      }
+    ],
+    "system": "Все браузеры",
+    "urgency": "low",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "ожидание"
+  },
+
+  "NETWORK_DNS_PROBE_FINISHED_BAD_CONFIG": {
+    "code": "NETWORK_DNS_PROBE_FINISHED_BAD_CONFIG",
+    "title": "Неправильная конфигурация DNS",
+    "description": "Настройки DNS на устройстве или роутере неверны.",
+    "causes": [
+      "Неверные DNS серверы в настройках",
+      "Проблемы с DHCP сервером",
+      "Конфликты сетевых настроек",
+      "Блокировка DNS запросов"
+    ],
+    "category": "network",
+    "subcategory": "DNS ошибки",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Автоматическое получение DNS",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Настройте автоматическое получение DNS",
+          "Используйте публичные DNS серверы",
+          "Перезагрузите сетевое оборудование"
+        ]
+      }
+    ],
+    "system": "Windows, macOS, Linux",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "DOTNET_FRAMEWORK_INITIALIZATION_ERROR": {
+    "code": "DOTNET_FRAMEWORK_INITIALIZATION_ERROR",
+    "title": "Ошибка инициализации .NET Framework",
+    "description": "Приложение не может запуститься из-за проблем с .NET Framework.",
+    "causes": [
+      "Отсутствует требуемая версия .NET",
+      "Повреждение установки Framework",
+      "Конфликты версий",
+      "Проблемы с конфигурацией"
+    ],
+    "category": "software",
+    "subcategory": ".NET Framework",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Установка .NET Framework",
+        "time": "10 минут",
+        "risk": "низкий",
+        "steps": [
+          "Скачайте и установите требуемую версию .NET",
+          "Включите .NET Framework в компонентах Windows",
+          "Перезагрузите компьютер"
+        ]
+      }
+    ],
+    "system": "Windows",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "GPU_DRIVER_CRASH": {
+    "code": "GPU_DRIVER_CRASH",
+    "title": "Сбой драйвера видеокарты",
+    "description": "Драйвер графического процессора перестал отвечать и был восстановлен.",
+    "causes": [
+      "Устаревшие драйверы видеокарты",
+      "Перегрев GPU",
+      "Нестабильный разгон",
+      "Конфликты программного обеспечения"
+    ],
+    "category": "hardware",
+    "subcategory": "Видеокарта",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Обновление драйверов видеокарты",
+        "time": "10 минут",
+        "risk": "низкий",
+        "steps": [
+          "Скачайте последние драйверы с сайта производителя",
+          "Выполните чистую установку драйверов",
+          "Проверьте температуру видеокарты"
+        ]
+      }
+    ],
+    "system": "Windows",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "DATABASE_DEADLOCK": {
+    "code": "DATABASE_DEADLOCK",
+    "title": "Взаимная блокировка в базе данных",
+    "description": "Две или более транзакции ожидают друг друга, создавая взаимную блокировку.",
+    "causes": [
+      "Неправильная последовательность блокировок",
+      "Долгие транзакции",
+      "Отсутствие индексов",
+      "Высокая конкурентная нагрузка"
+    ],
+    "category": "database",
+    "subcategory": "MySQL ошибки",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Анализ и оптимизация запросов",
+        "time": "15 минут",
+        "risk": "средний",
+        "steps": [
+          "Проверьте логи на предмет deadlock",
+          "Оптимизируйте порядок блокировок",
+          "Добавьте индексы для часто используемых полей"
+        ]
+      }
+    ],
+    "system": "MySQL, PostgreSQL",
+    "urgency": "high",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "ENCRYPTION_FAILED": {
+    "code": "ENCRYPTION_FAILED",
+    "title": "Ошибка шифрования данных",
+    "description": "Система не может зашифровать или расшифровать данные.",
+    "causes": [
+      "Повреждение ключей шифрования",
+      "Недостаток системных ресурсов",
+      "Проблемы с TPM модулем",
+      "Ошибки в алгоритмах шифрования"
+    ],
+    "category": "security",
+    "subcategory": "Шифрование",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Восстановление ключей шифрования",
+        "time": "15 минут",
+        "risk": "высокий",
+        "steps": [
+          "Проверьте целостность ключей шифрования",
+          "Восстановите ключи из резервной копии",
+          "Проверьте работу TPM модуля"
+        ]
+      }
+    ],
+    "system": "Windows, Linux",
+    "urgency": "high",
+    "frequency": "Низкая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "IE_COMPATIBILITY_VIEW_ERROR": {
+    "code": "IE_COMPATIBILITY_VIEW_ERROR",
+    "title": "Ошибка режима совместимости",
+    "description": "Internet Explorer не может правильно отобразить страницу в режиме совместимости.",
+    "causes": [
+      "Несовместимость кода с режимом совместимости",
+      "Устаревшие стандарты верстки",
+      "Проблемы с DOCTYPE",
+      "Конфликты мета-тегов"
+    ],
+    "category": "browser",
+    "subcategory": "Internet Explorer",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Настройка списка совместимости",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Добавьте сайт в список совместимости",
+          "Используйте правильные мета-теги",
+          "Обновите стандарты верстки"
+        ]
+      }
+    ],
+    "system": "Internet Explorer",
+    "urgency": "low",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "XBOX_CONTROLLER_DISCONNECT": {
+    "code": "XBOX_CONTROLLER_DISCONNECT",
+    "title": "Контроллер Xbox отключается",
+    "description": "Беспроводной контроллер постоянно теряет соединение с консолью.",
+    "causes": [
+      "Разряжены батареи",
+      "Помехи беспроводной связи",
+      "Проблемы с Bluetooth адаптером",
+      "Неисправность контроллера"
+    ],
+    "category": "gaming",
+    "subcategory": "Xbox",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка батарей и подключения",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Замените батареи в контроллере",
+          "Переподключите контроллер к консоли",
+          "Убедитесь в отсутствии помех"
+        ]
+      }
+    ],
+    "system": "Xbox One/Series",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "WINDOWS_UPDATE_CORRUPT": {
+    "code": "WINDOWS_UPDATE_CORRUPT",
+    "title": "Повреждение обновлений Windows",
+    "description": "Файлы обновления Windows повреждены и не могут быть установлены.",
+    "causes": [
+      "Прерывание загрузки обновлений",
+      "Повреждение системных файлов",
+      "Конфликты с антивирусным ПО",
+      "Недостаточно места на диске"
+    ],
+    "category": "windows",
+    "subcategory": "Ошибки обновления",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Очистка кэша обновлений",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Остановите службу обновлений",
+          "Удалите содержимое папки SoftwareDistribution",
+          "Перезапустите службу и проверьте обновления"
+        ]
+      }
+    ],
+    "system": "Windows 10/11",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "PERMISSION_DENIED_LINUX": {
+    "code": "PERMISSION_DENIED_LINUX",
+    "title": "Отказано в доступе - Permission denied",
+    "description": "Пользователь не имеет прав на выполнение операции с файлом или директорией.",
+    "causes": [
+      "Отсутствие прав на выполнение",
+      "Файл принадлежит другому пользователю",
+      "Ограничения SELinux/AppArmor",
+      "Неправильные настройки umask"
+    ],
+    "category": "linux",
+    "subcategory": "Права доступа",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Использование sudo для выполнения",
+        "time": "1 минута",
+        "risk": "низкий",
+        "steps": [
+          "Используйте sudo перед командой",
+          "Проверьте права доступа: ls -l",
+          "Измените владельца файла при необходимости"
+        ]
+      }
+    ],
+    "system": "Linux/Unix",
+    "urgency": "medium",
+    "frequency": "Очень высокая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "408": {
+    "code": "408",
+    "title": "Таймаут запроса - Request Timeout",
+    "description": "Сервер не получил полный запрос в течение установленного времени.",
+    "causes": [
+      "Медленное интернет-соединение",
+      "Перегрузка сервера",
+      "Проблемы с сетевой инфраструктурой",
+      "Большой размер запроса"
+    ],
+    "category": "http",
+    "subcategory": "Клиентские ошибки (4xx)",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка подключения и повтор",
+        "time": "2 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Проверьте скорость интернет-соединения",
+          "Обновите страницу",
+          "Попробуйте позже при меньшей нагрузке"
+        ]
+      }
+    ],
+    "system": "Все браузеры",
+    "urgency": "low",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "WIFI_AUTHENTICATION_FAILED": {
+    "code": "WIFI_AUTHENTICATION_FAILED",
+    "title": "Ошибка аутентификации Wi-Fi",
+    "description": "Устройство не может пройти аутентификацию в Wi-Fi сети.",
+    "causes": [
+      "Неверный пароль Wi-Fi",
+      "Несовместимость типа безопасности",
+      "Проблемы с точкой доступа",
+      "Блокировка по MAC-адресу"
+    ],
+    "category": "network",
+    "subcategory": "Wi-Fi подключение",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка пароля и настроек",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Убедитесь в правильности пароля",
+          "Проверьте тип безопасности сети",
+          "Переподключитесь к сети"
+        ]
+      }
+    ],
+    "system": "Windows, Android, iOS",
+    "urgency": "medium",
+    "frequency": "Высокая",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "EXCEL_FILE_CORRUPT": {
+    "code": "EXCEL_FILE_CORRUPT",
+    "title": "Файл Excel поврежден",
+    "description": "Microsoft Excel не может открыть файл из-за повреждения данных.",
+    "causes": [
+      "Неправильное сохранение файла",
+      "Проблемы с диском при записи",
+      "Вирусное заражение",
+      "Несовместимость версий"
+    ],
+    "category": "software",
+    "subcategory": "Microsoft Office",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Восстановление файла Excel",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Используйте встроенное средство восстановления",
+          "Откройте файл в безопасном режиме",
+          "Попробуйте открыть на другом компьютере"
+        ]
+      }
+    ],
+    "system": "Microsoft Excel",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "BAD_SECTOR_ERROR": {
+    "code": "BAD_SECTOR_ERROR",
+    "title": "Обнаружены битые сектора",
+    "description": "Жесткий диск имеет физически поврежденные сектора которые нельзя прочитать.",
+    "causes": [
+      "Физический износ диска",
+      "Удары или вибрация во время работы",
+      "Производственный брак",
+      "Перегрев накопителя"
+    ],
+    "category": "hardware",
+    "subcategory": "Накопители",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Проверка и замена диска",
+        "time": "60 минут",
+        "risk": "высокий",
+        "steps": [
+          "Запустите проверку диска на ошибки",
+          "Создайте резервную копию данных",
+          "Рассмотрите замену накопителя"
+        ]
+      }
+    ],
+    "system": "Windows, Linux",
+    "urgency": "high",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "POSTGRES_OUT_OF_MEMORY": {
+    "code": "POSTGRES_OUT_OF_MEMORY",
+    "title": "Недостаточно памяти в PostgreSQL",
+    "description": "Сервер PostgreSQL исчерпал выделенную память для операций.",
+    "causes": [
+      "Слишком большие запросы",
+      "Недостаточные настройки shared_buffers",
+      "Утечки памяти в расширениях",
+      "Высокая конкурентная нагрузка"
+    ],
+    "category": "database",
+    "subcategory": "PostgreSQL ошибки",
+    "audience": ["advanced"],
+    "solutions": [
+      {
+        "level": "advanced",
+        "title": "Оптимизация настроек памяти",
+        "time": "10 минут",
+        "risk": "средний",
+        "steps": [
+          "Настройте параметры shared_buffers и work_mem",
+          "Оптимизируйте запросы на использование памяти",
+          "Добавьте оперативной памяти серверу"
+        ]
+      }
+    ],
+    "system": "PostgreSQL",
+    "urgency": "high",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "FIREWALL_BLOCK": {
+    "code": "FIREWALL_BLOCK",
+    "title": "Блокировка брандмауэром",
+    "description": "Сетевой трафик блокируется настройками брандмауэра.",
+    "causes": [
+      "Строгие правила безопасности",
+      "Неправильная конфигурация правил",
+      "Конфликты между антивирусами",
+      "Блокировка неизвестных приложений"
+    ],
+    "category": "security",
+    "subcategory": "Контроль доступа",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Добавление исключения в брандмауэр",
+        "time": "3 минуты",
+        "risk": "средний",
+        "steps": [
+          "Откройте настройки брандмауэра Windows",
+          "Добавьте программу в список разрешенных",
+          "Перезапустите приложение"
+        ]
+      }
+    ],
+    "system": "Windows",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "FIREFOX_CRASH": {
+    "code": "FIREFOX_CRASH",
+    "title": "Аварийное завершение Firefox",
+    "description": "Браузер Mozilla Firefox неожиданно завершает работу.",
+    "causes": [
+      "Проблемные расширения",
+      "Повреждение профиля браузера",
+      "Конфликты с другим ПО",
+      "Ошибки в коде страниц"
+    ],
+    "category": "software",
+    "subcategory": "Веб-браузеры",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Сброс настроек Firefox",
+        "time": "5 минут",
+        "risk": "низкий",
+        "steps": [
+          "Запустите Firefox в безопасном режиме",
+          "Отключите проблемные расширения",
+          "Создайте новый профиль браузера"
+        ]
+      }
+    ],
+    "system": "Mozilla Firefox",
+    "urgency": "medium",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
+  },
+
+  "XBOX_LIVE_PARTY_CHAT_ERROR": {
+    "code": "XBOX_LIVE_PARTY_CHAT_ERROR",
+    "title": "Ошибка голосового чата Xbox Live",
+    "description": "Не удается подключиться к голосовому чату в Xbox Live.",
+    "causes": [
+      "Проблемы с настройками NAT",
+      "Блокировка сетевых портов",
+      "Неисправность гарнитуры",
+      "Проблемы с серверами Xbox Live"
+    ],
+    "category": "gaming",
+    "subcategory": "Xbox",
+    "audience": ["beginner", "advanced"],
+    "solutions": [
+      {
+        "level": "beginner",
+        "title": "Проверка подключения гарнитуры",
+        "time": "3 минуты",
+        "risk": "низкий",
+        "steps": [
+          "Проверьте подключение гарнитуры к контроллеру",
+          "Убедитесь что гарнитура не отключена в настройках",
+          "Проверьте уровень громкости"
+        ]
+      }
+    ],
+    "system": "Xbox One/Series",
+    "urgency": "low",
+    "frequency": "Средняя",
+    "lastUpdate": "03.10.2025",
+    "userAction": "требуется"
   }
-  }
+      }
